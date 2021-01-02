@@ -11,8 +11,15 @@
                         <input type="email" name="companyemail" id="cemail" placeholder="Company Email">
                         <input type="text" name="zipcode" id="zcode" placeholder="Zip Code"/>
                         <input type="tel" name="phonenumber" id="pnumber" placeholder="Phone Number">
-                        <input type="text" name="vacancyname" placeholder="Vacancy Name">
-                        <textarea name="desc" id="" cols="30" rows="10"></textarea>
+                        <input type="text" name="vacancyname" placeholder="Vacancy Name" style="width: 20%; display: inline-block">
+                        <!-- Cetegory -->
+                        <select class="custom-select" id="inputGroupSelect01" style="width: 10%;">
+                              <option value="Type_Switcher">Category</option>
+                              <option value="MB">Samsung</option>
+                              <option value="CM">Iphone</option>
+                              <option value="KG">Lenovo</option>
+                        </select>
+                        <!-- End CATEGORY -->
                         <input type="submit">
                   </form>
             </center>
