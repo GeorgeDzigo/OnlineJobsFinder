@@ -1,0 +1,21 @@
+/* ADD.PHP */
+      /* FORM HOLDER */
+            /* HEADERS HOLDER */
+                  .headersholder-h1{
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 2.5em;
+                        font-family: 'Roboto', sans-serif;
+                        padding: 40px;
+                  }
+            /* END HEADERS HOLDER */
+            /* INPUTS */
+                  .add input {
+                        display: block;
+                        margin-bottom: 20px;
+                  }
+            /* END INPUTS */
+
+/* END FORM HOLDER */
+
+/* END ADD.PHP */

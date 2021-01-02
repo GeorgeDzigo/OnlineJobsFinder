@@ -1,0 +1,102 @@
+body{
+      overflow-y: hidden;
+}
+/* HEADER */
+      .header{
+            height: 100px;
+      }
+      /* LOGO */
+            .logo{
+                  font-weight: bold;
+                  font-size: 50px;
+                  font-family: 'Bangers', cursive;
+                  margin-top: 30px;
+                  margin-left: 150px;
+                  display: inline-block;
+            } 
+      /* END LOGO */
+      /* NAVIGATION */
+            .nav{
+                  display: inline-block;
+                  position: absolute;
+                  top: 30px;
+                  left: 58%;
+            }
+            /* NAVIGATION LI */
+                  .nav-li {
+                        list-style: none;
+                        display: inline-block;
+                        padding: 15px;
+                  }
+
+                  /* NAVIGATION LI A */
+                        .nav-li-a {
+                              text-decoration: none;
+                              color:black;
+                              font-weight: bold;
+                              font-size: 23px;
+                        }
+                  /* END NAVIGATION LI A  */
+
+            /* END NAVIGATION LI */
+     
+      /* END NAVIGATION */
+
+/* END HEADER */
+
+
+/* INDEX.PHP */
+      /* SECTION */
+            .search-job {
+                  height: 837px;
+            }
+            /* FORM */
+                  .form{
+                        position: relative;
+                        top: 132px;
+                  }
+                  /* INPUT */
+                  input[type=text], select {
+                        width: 30%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        box-sizing: border-box;
+                  }
+                  input[type=submit] {
+                        width: 10%;
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 14px 20px;
+                        margin: 8px 0;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                  }
+                  input[type=email], select {
+                        width: 30%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        box-sizing: border-box;
+                  }
+                  input[type=tel], select {
+                        width: 30%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        box-sizing: border-box;
+                  }
+                  /* END INPUT */
+
+            /* END FORM */
+
+      /* END SECTION */
+
+/* END INDEX.PHP */
