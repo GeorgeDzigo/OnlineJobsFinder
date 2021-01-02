@@ -12,8 +12,8 @@
                         <input type="text" name="zipcode" id="zcode" placeholder="Zip Code"/>
                         <input type="tel" name="phonenumber" id="pnumber" placeholder="Phone Number">
                         <input type="text" name="vacancyname" placeholder="Vacancy Name" style="width: 20%; display: inline-block">
-                        <!-- Cetegory -->
-                        <select class="custom-select" id="inputGroupSelect01" style="width: 10%;">
+                        <!-- CATEGORY -->
+                        <select class="custom-select" id="inputGroupSelect01" style="width: 10%;" name="category">
                               <option value="Type_Switcher">Category</option>
                               <option value="MB">Samsung</option>
                               <option value="CM">Iphone</option>
