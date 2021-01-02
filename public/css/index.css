@@ -1,6 +1,3 @@
-body{
-      overflow-y: hidden;
-}
 /* HEADER */
       .header{
             height: 100px;
@@ -53,7 +50,7 @@ body{
             /* FORM */
                   .form{
                         position: relative;
-                        top: 132px;
+                        top: 83px;
                   }
                   /* INPUT */
                   input[type=text], select {

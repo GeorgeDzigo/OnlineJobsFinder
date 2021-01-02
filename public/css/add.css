@@ -14,6 +14,11 @@
                         display: block;
                         margin-bottom: 20px;
                   }
+                  .info{
+                        resize: none;
+                        width: 30%;
+                        height: 250px;
+                  }
             /* END INPUTS */
 
       /* END FORM HOLDER */
