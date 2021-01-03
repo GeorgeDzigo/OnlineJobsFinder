@@ -18,12 +18,25 @@ function inputChecker()  {
                   errors.push(v.name);
                   error.innerHTML += "<li>Please Provide " + v.placeholder + "</li>";
             }
-            // Check for numbers in text fields
-            else if (v.value != "") {
-                  for (let i = 0; i < txt.length; i++) {
-                        console.log(txt[i]);
-                        break;
-                  }
-            }
+            
       });
+
+      if (errors.length == 0) {
+            error.innerHTML = "";
+            inputs.forEach(v => {
+                  for (let i = 0; i < txt.length; i++) {
+                        if (v.name == txt[i]) {
+                              btn.type = "button";
+                              let exp = v.value.split("").filter(v => parseInt(v) != v);
+                              let nowthsp = v.value.split("").filter(v => v != " ");
+                              console.log(nowthsp);
+                              if (v.value.trim().length != exp.length) {
+                                    btn.type = "button";
+                                    errors.push(v.name);
+                                    error.innerHTML += "<li>Please Enter only letters: " + v.placeholder + "</li>";
+                              } else if (errors.length == 0) btn.type = "submit";
+                        }
+                  }
+            });
+      }
 }
