@@ -42,13 +42,13 @@
                         <!-- CATEGORY -->
                         <select class="custom-select" id="in" style="width: 10%;" name="category">
                               <option>Category</option>
-                              <option>Developer</option>
-                              <option>Engineer</option>
-                              <option>Designer</option>
+                              <option placeholder="Developer">Developer</option>
+                              <option placeholder="Engineer">Engineer</option>
+                              <option placeholder="Designer">Designer</option>
                         </select>
                         <!-- End CATEGORY -->
                         <input type="text" id="in" placeholder="Keywords, Please Seperate Keywords With Coma" name="keywords">
-                        <textarea name="info" id="in" class='info'></textarea>
+                        <textarea name="info" id="in" class='info' placeholder="Requirements"></textarea>
                         <button type="button" class='submit' id="submit" onclick='inputChecker()'>Submit</button>
                   </form>
             </center>
