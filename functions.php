@@ -24,7 +24,7 @@ class Functions extends DB{
             $sql->bindValue(":vn", $vname);
             $sql->bindValue(":vc", $category);
             $sql->bindValue(":kw", $keywords);
-            $sql->bindValue(":info",$info);
+            $sql->bindValue(":info",htmlentities($info));
             $sql->bindValue(":ud", id(8));
             $sql->execute();
       }
