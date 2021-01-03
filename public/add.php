@@ -32,25 +32,29 @@
             </div>
             <center>
                   <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="add" autocomplete="off">
-                        <input type="text" name="firstname" id="fname" placeholder="First Name" style='width: 15%; display: inline-block'>
-                        <input type="text" name="lastname" id="lname" placeholder="Last Name" style="width:15%; display: inline-block">
-                        <input type="text" name="companyname" id="cname" placeholder="Company Name">
-                        <input type="email" name="companyemail" id="cemail" placeholder="Company Email">
-                        <input type="text" name="zipcode" id="zcode" placeholder="Zip Code"/>
-                        <input type="tel" name="phonenumber" id="pnumber" placeholder="Phone Number">
-                        <input type="text" name="vacancyname" placeholder="Vacancy Name" style="width: 20%; display: inline-block">
+                        <input type="text" name="firstname" id="in" placeholder="First Name" style='width: 15%; display: inline-block'>
+                        <input type="text" name="lastname" id="in" placeholder="Last Name" style="width:15%; display: inline-block">
+                        <input type="text" name="companyname" id="in" placeholder="Company Name">
+                        <input type="email" name="companyemail" id="in" placeholder="Company Email">
+                        <input type="text" name="zipcode" id="in" placeholder="Zip Code"/>
+                        <input type="tel" name="phonenumber" id="in" placeholder="Phone Number">
+                        <input type="text" name="vacancyname" id="in"placeholder="Vacancy Name" style="width: 20%; display: inline-block">
                         <!-- CATEGORY -->
-                        <select class="custom-select" id="inputGroupSelect01" style="width: 10%;" name="category">
+                        <select class="custom-select" id="in" style="width: 10%;" name="category">
                               <option>Category</option>
                               <option>Developer</option>
                               <option>Engineer</option>
                               <option>Designer</option>
                         </select>
                         <!-- End CATEGORY -->
-                        <input type="text" placeholder="Keywords, Please Seperate Keywords With Coma" name="keywords">
-                        <textarea name="info" class='info'></textarea>
-                        <input type="submit">
+                        <input type="text" id="in" placeholder="Keywords, Please Seperate Keywords With Coma" name="keywords">
+                        <textarea name="info" id="in" class='info'></textarea>
+                        <button type="button" class='submit' id="submit" onclick='inputChecker()'>Submit</button>
                   </form>
             </center>
+            <p id="errors"> </p>
+         
       </div>
+<!-- Scripts -->
+<script src="js/add.js"></script>
 <?php include './view/footer.php'?>

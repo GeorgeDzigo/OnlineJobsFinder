@@ -1,5 +1,16 @@
 /* ADD.PHP */
       /* FORM HOLDER */
+            .submit {
+                  width: 10%;
+                  background-color: #4CAF50;
+                  color: white;
+                  padding: 14px 20px;
+                  margin: 8px 0;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+            }
+
             /* HEADERS HOLDER */
                   .headersholder-h1{
                         text-align: center;
@@ -18,9 +29,25 @@
                         resize: none;
                         width: 30%;
                         height: 250px;
+                        display: block;
                   }
             /* END INPUTS */
 
       /* END FORM HOLDER */
 
 /* END ADD.PHP */
+
+/* ERRORS */
+      #errors {
+            display: inline-block;
+            position: relative;
+            bottom: 236px;
+            left: 15px;
+      }
+      #errors > li {
+            color: red;
+            list-style: none;
+            font-size: 20px;
+            font-weight: bold;
+      }
+/* END ERRORS */

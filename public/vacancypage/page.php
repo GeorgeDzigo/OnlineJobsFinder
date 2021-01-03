@@ -44,8 +44,7 @@ $data = $data->vacashow($_GET['id']);
                   <h3>Company: <i><?= $data[0]["company_name"]?></i></h3>
             </div>
             
-            <pre class="info">
-<?=$data[0]["info"]?></pre>
+            <pre class="info"><?=$data[0]["info"]?></pre>
 </section>
       <center class="center"><hr style="width: 97%; background-color: lightgrey;">
       <footer class='footer'>© jobfinder.com. all rights reserved</footer>
