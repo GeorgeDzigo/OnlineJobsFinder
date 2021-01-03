@@ -30,16 +30,19 @@ class Functions extends DB{
       }
       // SHOW VACANCIES
       protected $datas = [];
-      protected $cnames = [];
-      protected $vnames = [];
+
       public function show() {
-            $sql = $this->pdo()->query("SELECT company_name, vacancy_name FROM vacancies");
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                  $this->cnames[] = $row['company_name'];
-                  $this->vnames[] = $row['vacancy_name'];
-            }
-            array_push($this->datas, $this->cnames);
-            array_push($this->datas, $this->vnames);
+            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name FROM vacancies");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
+            
             return $this->datas;
+      }
+      // Show Vacancy On Page
+      protected $vdata = [];
+
+      public function vacashow($id) {
+            $sql = $this->pdo()->query("SELECT company_name, vacancy_name, info FROM vacancies where id = " . $id);
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
+            return $this->vdata;
       }
 }

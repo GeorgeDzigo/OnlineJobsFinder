@@ -1,0 +1,35 @@
+/* VACAINFO */
+      .vacainfo {margin-top: 81px;}
+      .vacainfo-info {
+            margin: 30px;
+            background-color: #f7f7f7;
+            border-radius: 6px;
+            width: 96%;
+      }
+      .vacainfo-info > h3 {
+            padding: 13px;  
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+      }
+      .vacainfo-info > h3:nth-child(1) {border-bottom:1px solid lightgrey;}
+      .info {
+            position: relative;
+            left: 39px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+            height: 100%;
+            width: 80%;
+            white-space: pre-wrap;
+            line-height: 1.4em;
+      }
+/* END VACAINFO */
+
+/* CENTER */ .center {margin-top: 125px}
+
+/* FOOTER */
+      .footer {
+            margin-top: 30px;
+      }
+      
+/* END FOOTER */

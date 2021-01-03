@@ -45,7 +45,7 @@
 /* INDEX.PHP */
       /* SECTION */
             .search-job {
-                  height: 837px;
+                  height: 300px;
             }
             /* FORM */
                   .form{
@@ -97,3 +97,46 @@
       /* END SECTION */
 
 /* END INDEX.PHP */
+
+/* WORKS SECTION */
+            /* WORKS HEADINGS */
+                  .works-headings{
+                        display: flex;
+                        justify-content: space-around;
+                        padding: 15px 20px;
+                        background-color: #4CAF50;
+                        border-radius: 6px 6px 0px 0px;
+                        width: 95%;
+                  }
+                  .works-headings > h3{
+                        color: white;
+                        font-size: 17px;
+                        font-weight: bold;
+                        font-family: Arial, Helvetica, sans-serif;
+                  }
+            /* END WORKS HEADINGS */
+            
+            /* WORK VACANCIES */
+                  .works-vacancies{
+                        display: flex;
+                        justify-content: space-around;
+                        padding: 15px 19px;
+                        width: 95%;
+                        border: 1px solid #ddd;
+                  }
+                  .works-vacancies > h3{
+                        font-size: 17px;
+                        font-weight: bold;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: black;     
+                        padding-right: 40px;
+                  }
+                  
+                 .works-a{
+                        text-decoration: none !important;
+                        background-color: grey;
+                  }
+                  
+
+            /* END WORK VACANCIES */
+/* END WORKS SECTION */
