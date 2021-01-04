@@ -27,7 +27,7 @@ $vacas = new Functions();
             <p id="error"></p>
             <center>
                   <input type="text" name="search" placeholder="Search For Jobs" id="search-field">
-                  <select class="custom-select" id="in" style="width: 10%;" name="category">
+                  <select id="category" style="width: 10%;" name="Category">
                         <option>Category</option>
                         <option placeholder="Developer">Developer</option>
                         <option placeholder="Engineer">Engineer</option>
@@ -58,7 +58,7 @@ $vacas = new Functions();
                         <?php 
                         }}
                         else {
-                              $vacas = $vacas->vacaByKeywords($_GET);
+                              $vacas = $vacas->vacaByKeywords($_GET['s']);
                               foreach($vacas as $v) {
                         ?>
                          <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     

@@ -48,15 +48,13 @@ class Functions extends DB{
       // GET KEYWORDS
       protected $vacas = [];
 
-      public function vacaByKeywords($query) {
+      public function vacaByKeywords($s, $c = '') {
             $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies");
-            $query = explode("+", join(" ",explode("-", join("",$query))));
-            while ($row = $sql->fetch(PDO::FETCH_ASSOC)){
-                  $keys = explode(",", join(" ", explode("-",$row['keywords'])));
-                  for ($i = 0; $i < count($query); $i++)  {
-                        for($o = 0; $o < count($keys); $o++){
-                              if(strtolower($query[$i]) == strtolower($keys[$i])) $this->vacas[] = $row;
-                        }
+            $s = join(" ",explode("-", $s));
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
+                  for($i = 0; $i < count($key); $i++) {
+                        if($s == $key[$i]) $this->vacas[] = $row;
                   }
             }
             return $this->vacas;
