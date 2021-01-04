@@ -1,6 +1,6 @@
 <?php
 require_once "../functions.php";
-$data = new Functions();
+$vacas = new Functions();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,11 +24,16 @@ $data = new Functions();
 <body>
 <?php include './view/header.php'?>
       <section class="search-job">
+            <p id="error"></p>
             <center>
-                  <form action="#" method="POST" class="form">
-                  <input type="text" name="search" placeholder="Search For Jobs">
-                        <input type="submit" value="Search">
-                  </form>
+                  <input type="text" name="search" placeholder="Search For Jobs" id="search-field">
+                  <select class="custom-select" id="in" style="width: 10%;" name="category">
+                        <option>Category</option>
+                        <option placeholder="Developer">Developer</option>
+                        <option placeholder="Engineer">Engineer</option>
+                        <option placeholder="Designer">Designer</option>
+                  </select>
+                        <button type="submit" onclick="onbtnclick()">Search</button>
             </center>
       </section>    
       <!-- WORKS -->
@@ -39,7 +44,10 @@ $data = new Functions();
                               <h3>Company Name</h3>
                               <h3>Country</h3>
                         </div>
-                        <?php foreach($data->show() as $v){?>
+                        <?php 
+                        if(count($_GET) == 0) {
+                        foreach($vacas->show() as $v){
+                        ?>
                          <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
@@ -47,8 +55,24 @@ $data = new Functions();
                                     <h3>NONE</h3>
                               </div>
                         </a>
-                        <?php }?>
+                        <?php 
+                        }}
+                        else {
+                              $vacas = $vacas->vacaByKeywords($_GET);
+                              foreach($vacas as $v) {
+                        ?>
+                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                              <div class='works-vacancies'>
+                                    <h3><?= $v['vacancy_name']?></h3>
+                                    <h3><?= $v['company_name']?></h3>
+                                    <h3>NONE</h3>
+                              </div>
+                        </a>
+                        <?php }}?>
                   </center>
             </section>
       <!-- END WORKS -->
+<!-- scripts -->
+<script src="js/index.js"></script>
+<!-- end scripts -->
 <?php include './view/footer.php'?>

@@ -5,7 +5,7 @@ function id($n) {
       $str = str_split($str, 1);
       shuffle($str);
       $str = array_slice($str, 0, $n);
-      return  join("", $str);
+      return join("", $str);
 }
 id(8);
 
@@ -33,7 +33,7 @@ class Functions extends DB{
 
       public function show() {
             $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name FROM vacancies");
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
             
             return $this->datas;
       }
@@ -42,7 +42,23 @@ class Functions extends DB{
 
       public function vacashow($id) {
             $sql = $this->pdo()->query("SELECT company_name, vacancy_name, info FROM vacancies where id = " . $id);
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
             return $this->vdata;
+      }
+      // GET KEYWORDS
+      protected $vacas = [];
+
+      public function vacaByKeywords($query) {
+            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies");
+            $query = explode("+", join(" ",explode("-", join("",$query))));
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)){
+                  $keys = explode(",", join(" ", explode("-",$row['keywords'])));
+                  for ($i = 0; $i < count($query); $i++)  {
+                        for($o = 0; $o < count($keys); $o++){
+                              if(strtolower($query[$i]) == strtolower($keys[$i])) $this->vacas[] = $row;
+                        }
+                  }
+            }
+            return $this->vacas;
       }
 }

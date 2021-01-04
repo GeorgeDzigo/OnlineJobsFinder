@@ -45,7 +45,8 @@
 /* INDEX.PHP */
       /* SECTION */
             .search-job {
-                  height: 300px;
+                  height: 200px;
+                  margin-top: 100px;
             }
             /* FORM */
                   .form{
@@ -62,7 +63,7 @@
                         border-radius: 4px;
                         box-sizing: border-box;
                   }
-                  input[type=submit] {
+                  button[type=submit] {
                         width: 10%;
                         background-color: #4CAF50;
                         color: white;
