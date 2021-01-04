@@ -28,10 +28,11 @@ $vacas = new Functions();
             <center>
                   <input type="text" name="search" placeholder="Search For Jobs" id="search-field">
                   <select id="category" style="width: 10%;" name="Category">
-                        <option>Category</option>
-                        <option placeholder="Developer">Developer</option>
-                        <option placeholder="Engineer">Engineer</option>
-                        <option placeholder="Designer">Designer</option>
+                              <option>Category</option>
+                              <option placeholder="Developer">Developer</option>
+                              <option placeholder="Engineer">Engineer</option>
+                              <option placeholder="Designer">Designer</option>
+                              <option placeholder="Doctor">Doctor</option>
                   </select>
                         <button type="submit" onclick="onbtnclick()">Search</button>
             </center>

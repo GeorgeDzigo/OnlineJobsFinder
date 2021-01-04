@@ -45,6 +45,7 @@
                               <option placeholder="Developer">Developer</option>
                               <option placeholder="Engineer">Engineer</option>
                               <option placeholder="Designer">Designer</option>
+                              <option placeholder="Doctor">Doctor</option>
                         </select>
                         <!-- End CATEGORY -->
                         <input type="text" id="in" placeholder="Keywords" name="keywords">
