@@ -58,7 +58,7 @@ $vacas = new Functions();
                         <?php 
                         }}
                         else {
-                              $vacas = $vacas->vacaByKeywords($_GET['s']);
+                              $vacas = $vacas->vacaByKeywords($_GET['s'] == "-" ? 0 : $_GET['s'], $_GET['c'] == null ? 0 : $_GET['c']);
                               foreach($vacas as $v) {
                         ?>
                          <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     

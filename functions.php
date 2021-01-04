@@ -48,15 +48,33 @@ class Functions extends DB{
       // GET KEYWORDS
       protected $vacas = [];
 
-      public function vacaByKeywords($s, $c = '') {
-            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies");
-            $s = join(" ",explode("-", $s));
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                  $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
-                  for($i = 0; $i < count($key); $i++) {
-                        if($s == $key[$i]) $this->vacas[] = $row;
+      public function vacaByKeywords($s = '', $c = '') {
+            if($s != 0 && $c == 0) {
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies");
+                  $s = join(" ",explode("-", strtolower($s)));
+                  while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                        $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
+                        for($i = 0; $i < count($key); $i++) {
+                              if($s == $key[$i]) $this->vacas[] = $row;
+                        }
                   }
+                  return $this->vacas;
             }
-            return $this->vacas;
+            else if($s == 0 && $c != 0) {
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies WHERE '$c' = vacancy_category");
+                  while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vacas[] = $row;
+                  return $this->vacas;
+            }
+            else {
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies WHERE '$c' = vacancy_category");
+                  $s = join(" ",explode("-", strtolower($s)));
+                  while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                        $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
+                        for($i = 0; $i < count($key); $i++) {
+                              if($s == strtolower($key[$i])) $this->vacas[] = $row;
+                        }
+                  }
+                  return $this->vacas;
+            }
       }
 }
