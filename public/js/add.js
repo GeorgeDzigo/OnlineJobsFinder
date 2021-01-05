@@ -80,3 +80,65 @@ function inputChecker()  {
             });
       }
 }
+
+
+function register() { 
+      let inputs = document.querySelectorAll("#re");
+      let btn = document.getElementById('resubmit');
+      let perrors = document.getElementById('reerrors');
+      let errors = [];
+      errors = [];
+      perrors.innerHTML = '';
+
+      inputs.forEach(v => {
+            if (v.value == "") {
+                  btn.type = "button";
+                  errors.push(v.name);
+                  perrors.innerHTML = "<li>Please Don't Leave Empty Fields</li>"
+            }
+      });
+      if (errors.length == 0) {
+            inputs.forEach(v => {
+                  if (v.name == "companyname") {
+                        btn.type = "button";
+                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v && v != " " && v != "<" && v != ">" || v === '-' || v != "@") return v; });
+                        let nowthsp = v.value.split("").filter(v => v != " ");
+                        if (exp.length != nowthsp.length) {
+                              btn.type = "button";
+                              errors.push(v.name);
+                              perrors.innerHTML += "<li>Please Enter only letters: " + v.placeholder + "</li>";
+                        }
+                  }
+                  else if (v.name == "companyemail") {
+                        
+                        btn.type = "button";
+                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v && v != " " && v != "<" && v != ">" || v === '-' || v === "_" || v === '.') return v; });
+                        let nowthsp = v.value.split("").filter(v => v != " ");
+                        console.log(exp);
+                        if (exp.length != nowthsp.length || exp.indexOf("@") == -1) {
+                              btn.type = "button";
+                              errors.push(v.name);
+                              perrors.innerHTML += "<li>Please Enter Valid Email</li>";
+                        }
+                  }
+                  else if (v.name == "phonenumber") {
+                        btn.type = 'button';
+                        let exp = v.value.match(/[0-9]/gi);
+                        let p = v.value.charAt(0) == "+";
+                        if (p == true && exp.length != v.value.length - 1 || p == false && exp.length != v.value.length) {
+                              btn.type = "button";
+                              errors.push(v.name);
+                              perrors.innerHTML += "<li>Please Enter only Numbers: " + v.placeholder + "</li>";
+                        }
+                        else if (p == true && v.value.length - 1 != 12 || p == false && v.value.length != 10) {
+                              btn.type = "button";
+                              errors.push(v.name);
+                              perrors.innerHTML += "<li>Please Enter Valid Phone Number</li>";
+                        }
+                        else if (errors.length == 0) btn.type = "submit";
+                  }
+                  else btn.type = "submit";
+                  
+            });
+      }
+}

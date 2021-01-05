@@ -1,5 +1,6 @@
 <?php
 include_once 'cn.php';
+session_start();
 function id($n) {
       $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       $str = str_split($str, 1);
@@ -15,7 +16,7 @@ class Functions extends DB{
       public function insert($fname, $lname, $cname,$cemail, $zcode, $pnumber, $vname, $category, $keywords, $info) {
             $date = date("Y")."-".date("m")."-".date("d");
             $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, company_name, company_email, zip_code, phone_number, vacancy_name, vacancy_category, keywords, info, publish_date, expiration_date, unique_id)
-                                                       values (:fn, :ln, :cn, :ce, :zc, :pn, :vn, :vc, :kw, :info, :pud, :expd,:ud)");
+                                                         VALUES (:fn, :ln, :cn, :ce, :zc, :pn, :vn, :vc, :kw, :info, :pud, :expd,:ud)");
             $sql->bindValue(":fn", $fname);
             $sql->bindValue(":ln", $lname);
             $sql->bindValue(":cn", $cname);
@@ -91,5 +92,15 @@ class Functions extends DB{
                         $del->execute();
                   }
             }
+      }
+      public function register($cname,$cpass, $cemail,$pnumber) {
+            $sql = $this->pdo()->prepare("INSERT INTO companies (company_name, company_password, company_email, company_phone, unique_id)
+                                                       VALUES (:cn, :cp, :ce, :cphone, :ud)");
+            $sql->bindValue(":cn", $cname);
+            $sql->bindValue(":cp", $cpass);
+            $sql->bindValue(":ce", $cemail);
+            $sql->bindValue(':cphone', $pnumber);
+            $sql->bindValue(":ud", id(8));
+            $sql->execute();
       }
 }

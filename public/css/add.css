@@ -50,4 +50,22 @@
             font-size: 20px;
             font-weight: bold;
       }
+
 /* END ERRORS */
+
+/* REIGSTER */
+      /* ERRORS */
+            #reerrors {
+                  display: inline-block;
+                  position: relative;
+                  left: 15px;
+            }
+            #reerrors > li {
+                  color: red;
+                  list-style: none;
+                  font-size: 20px;
+                  font-weight: bold;
+            }
+      /* END ERRORS */
+
+/* END REGISTER */

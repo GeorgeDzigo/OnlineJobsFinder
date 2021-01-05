@@ -19,7 +19,35 @@
 </head>
 <body>
       <?php include './view/header.php'?>
-      <?php
+
+      <?php if(!isset($_SESSION['cmpn_name'])) {
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  require_once '../functions.php';
+                  $insert = new Functions();
+                  $insert->register($_POST['companyname'], $_POST['password'], $_POST['companyemail'], $_POST['phonenumber']);
+                  $_SESSION['cmpn_name'] = $_POST['companyname'];
+            }
+      ?>
+            <div class="formholder">
+            <div class="headersholder">
+                  <h1 class="headersholder-h1">Fill Your Vacancy</h1>
+            </div>
+            <center>
+                  <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="add" autocomplete="off">
+                        <input type="text" name="companyname" id="re" placeholder="Company Name">
+                        <input type="email" name="companyemail" id="re" placeholder="Company Email">
+                        <input type="password" name="password" id="re" placeholder="Password">
+                        <input type="tel" name="phonenumber" id="re" placeholder="Company Number">
+
+                        <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
+                  </form>
+            </center>
+            <p id="reerrors"> </p>
+      </div>
+      
+      <?php 
+      }
+      else {
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
             require_once '../functions.php';
             $insert = new Functions();
@@ -54,8 +82,8 @@
                   </form>
             </center>
             <p id="errors"> </p>
-         
       </div>
+      <?php }?>
 <!-- Scripts -->
 <script src="js/add.js"></script>
 <?php include './view/footer.php'?>
