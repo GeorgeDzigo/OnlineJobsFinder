@@ -67,13 +67,18 @@ session_start()
                         else {
                               $vacas = $vacas->vacaByKeywords($_GET['s'] == "-" ? 0 : $_GET['s'], $_GET['c'] == null ? 0 : $_GET['c']);
                               foreach($vacas as $v) {
+                                    $date =  explode("-", $v['publish_date']);
+                                    $m = $date[1]; $d = $date[2];
                         ?>
                          <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
+                              
                                     <h3><?= $v['vacancy_name']?></h3>
                                     <h3><?= $v['company_name']?></h3>
-                                    <h3>NONE</h3>
+                                    <h3><?= date("d". strtotime($d)) . " " . DateTime::createFromFormat('!m', date('m', strtotime($m)))->format('F')?></h3>
+                                    
                               </div>
+                              
                         </a>
                         <?php }}?>
                   </center>

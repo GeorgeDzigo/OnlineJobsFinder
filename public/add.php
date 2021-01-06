@@ -31,7 +31,7 @@
             if(count($_SESSION) == 1 && $_GET['s'] == "signup" || count($_SESSION) == 1 && $_GET['s'] == 'signin') header("Location: ./add.php?s=publish");
             if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
                   if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $fn->insert($_POST['firstname'], $_POST['lastname'], $_POST['companyname'], $_POST['companyemail'], $_POST['zipcode'], $_POST['phonenumber'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info']);
+                        $fn->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_SESSION['cmpn_name']);
                         echo '<script>window.location.replace("./index.php")</script>';
                   }
       ?>
@@ -43,10 +43,7 @@
                         <form action="<?php echo $_SERVER['PHP_SELF'] . "?s=publish";?>" method="POST" class="add" autocomplete="off">
                               <input type="text" name="firstname" id="in" placeholder="First Name" style='width: 15%; display: inline-block'>
                               <input type="text" name="lastname" id="in" placeholder="Last Name" style="width:15%; display: inline-block">
-                              <input type="text" name="companyname" id="in" placeholder="Company Name">
-                              <input type="email" name="companyemail" id="in" placeholder="Company Email">
-                              <input type="text" name="zipcode" id="in" placeholder="Zip Code"/>
-                              <input type="tel" name="phonenumber" id="in" placeholder="Phone Number">
+                              <div></div>
                               <input type="text" name="vacancyname" id="in"placeholder="Vacancy Name" style="width: 20%; display: inline-block">
                               <!-- CATEGORY -->
                               <select class="custom-select" id="in" style="width: 10%;" name="category">

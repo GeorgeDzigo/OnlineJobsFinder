@@ -9,24 +9,29 @@ function id($n) {
 }
 
 class Functions extends DB{
-      public function insert($fname, $lname, $cname,$cemail, $zcode, $pnumber, $vname, $category, $keywords, $info) {
+      public function insert($fname, $lname, $vname, $category, $keywords, $info, $cname) {
+            $cmtable = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
+            while($row = $cmtable->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_name'] == $cname){
+                        $cn = $row['company_name'];
+                        $ci = $row['unique_id'];
+                  }
+            }
             $date = date("Y")."-".date("m")."-".date("d");
-            $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, company_name, company_email, zip_code, phone_number, vacancy_name, vacancy_category, keywords, info, publish_date, expiration_date, unique_id)
-                                                         VALUES (:fn, :ln, :cn, :ce, :zc, :pn, :vn, :vc, :kw, :info, :pud, :expd,:ud)");
+            $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, vacancy_name, vacancy_category, keywords, info, publish_date, expiration_date, vacancy_id, company_name, company_id)
+            values(:fn, :ln, :vn, :vc, :ke, :info, :pd, :ed, :vi, :cn, :ci)");
             $sql->bindValue(":fn", $fname);
             $sql->bindValue(":ln", $lname);
-            $sql->bindValue(":cn", $cname);
-            $sql->bindValue(":ce", $cemail);
-            $sql->bindValue(":zc", $zcode);
-            $sql->bindValue(":pn", $pnumber);
             $sql->bindValue(":vn", $vname);
             $sql->bindValue(":vc", $category);
-            $sql->bindValue(":kw", $keywords);
+            $sql->bindValue(":ke", $keywords);
+            $sql->bindValue(":info", $info);
             // DATE
-                  $sql->bindValue(":pud", $date);
-                  $sql->bindValue(":expd", date('Y-m-d', strtotime($date. ' + 1 days')));
-            $sql->bindValue(":info",htmlentities($info));
-            $sql->bindValue(":ud", id(8));
+                  $sql->bindValue(":pd", $date);
+                  $sql->bindValue(":ed", date('Y-m-d', strtotime($date. ' + 1 days')));
+            $sql->bindValue(":vi", id(8));
+            $sql->bindValue(':cn', $cn);
+            $sql->bindValue(':ci', $ci);
             $sql->execute();
       }
       // SHOW VACANCIES

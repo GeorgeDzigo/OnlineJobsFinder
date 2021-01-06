@@ -6,7 +6,7 @@
                         <li class="nav-li"> <a href="./add.php?s=publish" class="nav-li-a">Publish Vacancies</a></li>
                         <li class="nav-li"> <a href="#" class="nav-li-a">Contact</a></li>
                         <?php if(count($_SESSION) != 0) { ?>
-                              <li class="nav-li" id="profile-drop"><center><i class="fa fa-user-o" id="profile" aria-hidden="true"></i></center>
+                              <li class="nav-li" id="profile-drop"><i class="fa fa-user-o" id="profile" aria-hidden="true"></i>
                               <div id="dropdown" style="display:none">
                               <center>
                                     <div class="company_name"><?= $_SESSION['cmpn_name']?></div>

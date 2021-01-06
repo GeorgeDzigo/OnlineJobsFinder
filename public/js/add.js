@@ -10,7 +10,7 @@ function inputChecker()  {
       inputs.forEach(v => arr.push(v.name));
 
       // Inputs with text only
-      let txt = [arr[0], arr[1], arr[2], arr[6], arr[8]];
+      let txt = [arr[0], arr[1], arr[2], arr[4]];
       // inputs
       inputs.forEach(v => {
             if (v.value == "") {
@@ -24,37 +24,7 @@ function inputChecker()  {
       if (errors.length == 0) {
             error.innerHTML = "";
             inputs.forEach(v => {
-                  if (v.name == "zipcode") { 
-                        btn.type = "button";
-                        let exp = v.value.match(/[0-9]/gi);
-                        if (exp.length != v.value.length ) {
-                              btn.type = "button";
-                              errors.push(v.name);
-                              error.innerHTML += "<li>Please Enter only Numbers: " + v.placeholder + "</li>";
-                        }
-                        else if (exp.length < 3 || exp.length > 5) {
-                              btn.type = "button";
-                              errors.push(v.name);
-                              error.innerHTML += "<li>Please Enter Valid Zip-Code</li>";
-                        }
-                  }
-                  else if (v.name == "phonenumber") {
-                         btn.type = 'button';
-
-                         let exp = v.value.match(/[0-9]/gi);
-                         let p = v.value.charAt(0) == "+";
-                         if (p == true && exp.length != v.value.length - 1 || p == false && exp.length != v.value.length) {
-                               btn.type = "button";
-                               errors.push(v.name);
-                               error.innerHTML += "<li>Please Enter only Numbers: " + v.placeholder + "</li>";
-                         }
-                         else if (p == true && v.value.length - 1 != 12 || p == false && v.value.length != 10) {
-                              btn.type = "button";
-                              errors.push(v.name);
-                              error.innerHTML += "<li>Please Enter Valid Phone Number</li>";  
-                         }
-                  }
-                  else if (v.name == "category") {
+                  if (v.name == "category") {
                         btn.type = "button";
                         if (v.value == "Category") {
                               btn.type = "button";

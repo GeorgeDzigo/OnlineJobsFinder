@@ -8,7 +8,7 @@
                   font-size: 50px;
                   font-family: 'Bangers', cursive;
                   margin-top: 30px;
-                  margin-left: 150px;
+                  margin-left: 7%;
                   display: inline-block;
             } 
       /* END LOGO */
@@ -16,7 +16,10 @@
             .nav{
                   display: inline-block;
                   position: relative;
-                  left: 42%;
+                  width: 500px;
+                  float: right;
+                  margin-top: 33px;
+                  margin-right: 4%;
             }
             /* NAVIGATION LI */
                   .nav-li {
@@ -122,6 +125,7 @@
                         font-size: 17px;
                         font-weight: bold;
                         font-family: Arial, Helvetica, sans-serif;
+                        width: 100%;
                   }
             /* END WORKS HEADINGS */
             
@@ -138,7 +142,7 @@
                         font-weight: bold;
                         font-family: Arial, Helvetica, sans-serif;
                         color: black;     
-                        padding-right: 40px;
+                        width: 100%;
                   }
                   
                  .works-a{
@@ -154,7 +158,6 @@
             /* PROFILE DROPDOWN */
                   #profile-drop {
                         position: absolute;
-                        right: -103px;
                         padding: 0;
                         margin-top: 13px;
                   }
@@ -180,6 +183,10 @@
 
                               .signout{
                                     width: 59px;
+                              }
+                              .signout > a {
+                                    text-decoration: none;
+                                    color: black;
                               }
                         /* END DROPDOWN */
             /* END PROFILE DROPDOWN */
