@@ -15,9 +15,8 @@
       /* NAVIGATION */
             .nav{
                   display: inline-block;
-                  position: absolute;
-                  top: 30px;
-                  left: 58%;
+                  position: relative;
+                  left: 42%;
             }
             /* NAVIGATION LI */
                   .nav-li {
@@ -150,3 +149,38 @@
 
             /* END WORK VACANCIES */
 /* END WORKS SECTION */
+
+/* PROFILE CSS */
+            /* PROFILE DROPDOWN */
+                  #profile-drop {
+                        position: absolute;
+                        right: -103px;
+                        padding: 0;
+                        margin-top: 13px;
+                  }
+                        /* PROFILE ICON */
+                              #profile 
+                              { 
+                                    font-size: 170%;
+                              }
+                        /* END PROFILE ICON */
+
+                        /* DROPDOWN */
+                              #dropdown{
+                                    background-color: #F8F8F8;
+                                    padding: 15px;
+                                    border-radius: 5px;
+                                    position: absolute;
+                                    left: -190%;
+                                    top: 98%;
+                              }
+                              #dropdown > center > div {
+                                    padding: 15px;
+                              }
+
+                              .signout{
+                                    width: 59px;
+                              }
+                        /* END DROPDOWN */
+            /* END PROFILE DROPDOWN */
+/* END PROFILE CSS */

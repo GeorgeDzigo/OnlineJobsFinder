@@ -11,6 +11,8 @@
       
       <link rel="stylesheet" href="css/add.css">
 
+      <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+
       <!-- FONT -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bangers&display=swap" rel="stylesheet">
@@ -26,6 +28,7 @@
 
       <!-- PUBLISH  -->
       <?php
+            if(count($_SESSION) == 1 && $_GET['s'] == "signup" || count($_SESSION) == 1 && $_GET['s'] == 'signin') header("Location: ./add.php?s=publish");
             if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
                   if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $fn->insert($_POST['firstname'], $_POST['lastname'], $_POST['companyname'], $_POST['companyemail'], $_POST['zipcode'], $_POST['phonenumber'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info']);

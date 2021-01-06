@@ -17,6 +17,8 @@ $data = $data->vacashow($_GET['id']);
 
       <link rel="stylesheet" href="css/page.css">
 
+      <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+
       <!-- FONT -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bangers&display=swap" rel="stylesheet">
@@ -45,9 +47,12 @@ $data = $data->vacashow($_GET['id']);
             </div>
             
             <pre class="info"><?=$data[0]["info"]?></pre>
-</section>
+      </section>
       <center class="center"><hr style="width: 97%; background-color: lightgrey;">
       <footer class='footer'>© jobfinder.com. all rights reserved</footer>
       </center>
+
+      <!-- SCRIPT DROPDOWN -->
+      <script src="js/profiledropdown.js"></script>
 </body>
 </html>
