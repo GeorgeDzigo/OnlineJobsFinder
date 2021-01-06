@@ -1,6 +1,5 @@
 <?php
 include_once 'cn.php';
-session_start();
 function id($n) {
       $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       $str = str_split($str, 1);
@@ -8,9 +7,6 @@ function id($n) {
       $str = array_slice($str, 0, $n);
       return join("", $str);
 }
-id(8);
-
-
 
 class Functions extends DB{
       public function insert($fname, $lname, $cname,$cemail, $zcode, $pnumber, $vname, $category, $keywords, $info) {
@@ -93,6 +89,7 @@ class Functions extends DB{
                   }
             }
       }
+
       public function register($cname,$cpass, $cemail,$pnumber) {
             $sql = $this->pdo()->prepare("INSERT INTO companies (company_name, company_password, company_email, company_phone, unique_id)
                                                        VALUES (:cn, :cp, :ce, :cphone, :ud)");
@@ -102,5 +99,15 @@ class Functions extends DB{
             $sql->bindValue(':cphone', $pnumber);
             $sql->bindValue(":ud", id(8));
             $sql->execute();
+            return $_SESSION['cmpn_name'] = $cname;
+      }
+      
+      public function signin($cname, $cpass) {
+            $pass = $this->pdo()->query("SELECT company_name, company_password FROM companies");
+            while($row = $pass->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_name'] == $cname && $row['company_password'] == $cpass) {
+                        return $_SESSION['cmpn_name'] = $row['company_name'];
+                  }
+            }
       }
 }

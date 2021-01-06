@@ -58,6 +58,7 @@
             #reerrors {
                   display: inline-block;
                   position: relative;
+                  bottom: 236px;
                   left: 15px;
             }
             #reerrors > li {

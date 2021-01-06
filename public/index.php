@@ -2,6 +2,7 @@
 require_once "../functions.php";
 $vacas = new Functions();
 $vacas->delete();
+session_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">
