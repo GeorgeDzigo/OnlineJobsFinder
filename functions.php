@@ -9,6 +9,11 @@ function id($n) {
 }
 
 class Functions extends DB{
+      protected function get_unique_id($cname) {
+            $sql = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) if($row['company_name'] == $cname) return $row['unique_id'];
+      }
+
       public function insert($fname, $lname, $vname, $category, $keywords, $info, $cname) {
             $cmtable = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
             while($row = $cmtable->fetch(PDO::FETCH_ASSOC)) {
@@ -40,8 +45,20 @@ class Functions extends DB{
       public function show() {
             $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date FROM vacancies");
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
-            
             return $this->datas;
+      }
+
+      // Show my vacancies
+      protected $myvacas = [];
+      public function myvacas() {
+            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, company_id FROM VACANCIES");
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_id'] === $this->get_unique_id($_SESSION['cmpn_name'])) {
+                        array_pop($row);
+                        $this->myvacas[] = $row;
+                  }
+            };
+            return $this->myvacas;
       }
       // Show Vacancy On Page
       protected $vdata = [];
@@ -93,6 +110,28 @@ class Functions extends DB{
                         $del->execute();
                   }
             }
+      }
+      // CHECK AND REGISTER FUNCTION
+      protected $errors = [];
+
+      public function checkAnRegister($cname,$cpass, $cemail,$pnumber) {
+            $sql = $this->pdo()->query("SELECT company_name, company_email, company_phone FROM companies");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                        if ($row['company_name'] == $cname) {
+                              $this->errors['company_name'] = "Name is already taken"; 
+                              $this->errors['name'] = $cname;
+                        }
+                        else if ($row['company_email'] == $cemail) {
+                              $this->errors['company_email'] = "Email is already taken";
+                              $this->errors['email'] = $cemail;
+                        }
+                        else if ($row['company_phone'] == $pnumber) {
+                              $this->errors['company_phone'] = "Phone number is already taken";
+                              $this->errors['phone'] = $pnumber;
+                        } 
+            }
+            if(count($this->errors) != 0) return $this->errors;
+            else  $this->register($cname, $cpass, $cemail, $pnumber);
       }
 
       public function register($cname,$cpass, $cemail,$pnumber) {

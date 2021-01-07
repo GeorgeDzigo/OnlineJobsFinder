@@ -71,8 +71,8 @@ function register() {
             inputs.forEach(v => {
                   if (v.name == "companyname") {
                         btn.type = "button";
-                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v && v != " " && v != "<" && v != ">" || v === '-' || v != "@") return v; });
-                        let nowthsp = v.value.split("").filter(v => v != " ");
+                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v && v == " " && v != "<" && v != ">" || v === '-' || v != "@") return v; });
+                        let nowthsp = v.value.split("").map(v => v);
                         if (exp.length != nowthsp.length) {
                               btn.type = "button";
                               errors.push(v.name);
@@ -82,7 +82,7 @@ function register() {
                   else if (v.name == "companyemail") {
                         
                         btn.type = "button";
-                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v && v != " " && v != "<" && v != ">" || v === '-' || v === "_" || v === '.') return v; });
+                        let exp = v.value.split("").filter(v => { if (parseInt(v) != v || v != " " || v != "<" && v != ">" || v === '-' || v === "_" || v === '.' || v == "@") return v; });
                         let nowthsp = v.value.split("").filter(v => v != " ");
                         console.log(exp);
                         if (exp.length != nowthsp.length || exp.indexOf("@") == -1) {
@@ -109,6 +109,39 @@ function register() {
                   }
                   else btn.type = "submit";
                   
+            });
+      }
+}
+
+function resetpassword() { 
+            let inputs = document.querySelectorAll("#re");
+            let btn = document.getElementById('resubmit');
+            let perrors = document.getElementById('reerrors');
+            let errors = [];
+            errors = [];
+            perrors.innerHTML = '';
+      
+            inputs.forEach(v => {
+                  if (v.value == "") {
+                        btn.type = "button";
+                        errors.push(v.name);
+                        perrors.innerHTML = "<li>Please Don't Leave Empty Fields</li>"
+                  }
+            });
+            if (errors.length == 0) {
+                  inputs.forEach(v => {
+                        if (v.name == "companyemail") {
+                              btn.type = "button";
+                              let exp = v.value.split("").filter(v => { if (parseInt(v) != v || v != " " || v != "<" && v != ">" || v === '-' || v === "_" || v === '.' || v == "@") return v; });
+                              let nowthsp = v.value.split("").filter(v => v != " ");
+                              console.log(exp);
+                              if (exp.length != nowthsp.length || exp.indexOf("@") == -1) {
+                                    btn.type = "button";
+                                    errors.push(v.name);
+                                    perrors.innerHTML += "<li>Please Enter Valid Email</li>";
+                              }
+                        }
+                  else if(errors.length == 0) btn.type = "submit";
             });
       }
 }

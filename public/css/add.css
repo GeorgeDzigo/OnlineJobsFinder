@@ -74,3 +74,13 @@
 /* SIGN OUT BUTTON */
 
 /* END SIGN OUT BUTTON */
+
+
+/* NPTRRS */
+            .nptrrs{
+                  color: red;
+                  font-weight: bold;
+                  position: relative;
+                  bottom: 79px;
+            }
+/* END NPTRRS */

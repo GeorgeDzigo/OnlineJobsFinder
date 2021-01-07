@@ -171,7 +171,6 @@
                         /* DROPDOWN */
                               #dropdown{
                                     background-color: #F8F8F8;
-                                    padding: 15px;
                                     border-radius: 5px;
                                     position: absolute;
                                     left: -190%;
@@ -179,15 +178,37 @@
                               }
                               #dropdown > center > div {
                                     padding: 15px;
+                                    font-weight: bold;      
+                                    width: 87px;
                               }
-
-                              .signout{
-                                    width: 59px;
+                              #dropdown > center > div:nth-child(1):hover {
+                                    background-color:#c6c6c6;
+                                    border-radius: 5px 5px 0px 0px;
+                                    animation-name: dropdown;
+                                    animation-duration: .5s;
                               }
-                              .signout > a {
+                              #dropdown > center > div:nth-child(2):hover {
+                                    background-color:#c6c6c6;
+                                    animation-name: dropdown;
+                                    animation-duration: .5s;
+                              }
+                              #dropdown > center > div:nth-child(3):hover {
+                                    background-color:#c6c6c6;
+                                    border-radius: 0px 0px 5px 5px;
+                                    animation-name: dropdown;
+                                    animation-duration: .5s;
+                              }
+                              a {
                                     text-decoration: none;
                                     color: black;
                               }
                         /* END DROPDOWN */
             /* END PROFILE DROPDOWN */
 /* END PROFILE CSS */
+
+/* ANIMATIONS */
+@keyframes dropdown {
+      from{background-color:#F8F8F8;}
+      to {background-color: #c6c6c6;}
+}
+/* END ANIMATIONS */

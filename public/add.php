@@ -26,7 +26,7 @@
       $fn = new Functions();
       ?>
 
-      <!-- PUBLISH  -->
+      
       <?php
             if(count($_SESSION) == 1 && $_GET['s'] == "signup" || count($_SESSION) == 1 && $_GET['s'] == 'signin') header("Location: ./add.php?s=publish");
             if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
@@ -34,7 +34,7 @@
                         $fn->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_SESSION['cmpn_name']);
                         echo '<script>window.location.replace("./index.php")</script>';
                   }
-      ?>
+      ?><!-- PUBLISH  -->
             <div class="formholder">
                   <div class="headersholder">
                         <h1 class="headersholder-h1">Fill Your Vacancy</h1>
@@ -61,38 +61,40 @@
                   </center>
                   <p id="errors"> </p>
             </div>
+            <!-- END PUBLISH -->
       <?php }
       
       else if(count($_SESSION) == 0 && $_GET['s'] == 'publish') echo "<script>window.location.replace('./add.php?s=signup')</script>";
       ?>
-      <!-- END PUBLISH -->
-      <!-- SIGN UP -->
+      
+      
       <?php 
       if (count($_SESSION) == 0 && $_GET['s'] == 'signup') {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                  $fn->register($_POST['companyname'], $_POST['password'], $_POST['companyemail'], $_POST['phonenumber']);
-                  echo "<script>window.location.replace('./add.php?s=publish')</script>";
+                  $fn = $fn->checkAnRegister($_POST['companyname'], $_POST['password'], $_POST['companyemail'], $_POST['phonenumber']);
+                  if($fn == null) echo "<script>window.location.replace('./add.php?s=publish')</script>";
             }
-      ?>
+      ?><!-- SIGN UP -->
             <div class="formholder">
                   <div class="headersholder">
                         <h1 class="headersholder-h1">Company Registration</h1>
                   </div>
                   <center>
                         <form action="<?php $_SERVER['PHP_SELF'] . "?s=signup"?>" method="POST" class="add" autocomplete="off">
-                              <input type="text" name="companyname" id="re" placeholder="Company Name">
-                              <input type="email" name="companyemail" id="re" placeholder="Company Email">
+                              <input type="text" name="companyname" id="re" placeholder="Company Name"  <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($fn != null) echo "value='".$fn['name']."'>" . "<h4 class='nptrrs'>".$fn['company_name']."</h4>"; echo ">"?>
+                              <input type="email" name="companyemail" id="re" placeholder="Company Email" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($fn != null) echo "value='".$fn['email']."'>" . "<h4 class='nptrrs'>".$fn['company_email']."</h4>"; echo ">"?>
                               <input type="password" name="password" id="re" placeholder="Password">
-                              <input type="tel" name="phonenumber" id="re" placeholder="Company Number">
+                              <input type="tel" name="phonenumber" id="re" placeholder="Company Number" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($fn != null) echo "value='".$fn['phone']."'>" . "<h4 class='nptrrs'>".$fn['company_phone']."</h4>"; echo ">"?>
                               <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
                         </form>
                         <a href="./add.php?s=signin" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Have An Account? Sign In Then</a>
                   </center>
                   <p id="reerrors"> </p>
             </div>
+            <!-- END SIGN UP -->
       <?php }?>
-      <!-- END SIGN UP -->
-      <!-- SIGN IN -->
+      
+      
       <?php if (count($_SESSION) == 0 && $_GET['s'] == 'signin') {
                   if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $d = "";
@@ -106,6 +108,7 @@
                         }
                   }
       ?>
+      <!-- SIGN IN -->
        <div class="formholder">
                   <div class="headersholder">
                         <h1 class="headersholder-h1">Sign In</h1>
@@ -116,13 +119,37 @@
                               <input type="password" name="password" id="re" placeholder="Password">
                               <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
                         </form>
-                        <a href="./add.php?s=signup" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Don't have an account yet? Create one!</a>
+                         
+                        <a href="./add.php?s=signup" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Don't have an account yet? Create one!</a><span style='font-size: 30px;'>|</span>
+                        <a href="./add.php?s=resetpassword" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Reset Password</a>
                   </center>
                   <p id="reerrors"> </p>
             </div>
+            <!-- END SIGN IN -->
       <?php }?>
+      <?php if(count($_SESSION) == 0 && $_GET['s'] == "resetpassword") {
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  echo "You did it";
+            }      
+      ?>
+            <div class="formholder">
+                  <div class="headersholder">
+                        <h1 class="headersholder-h1">Reset Password</h1>
+                  </div>
+                  <center>
+                        <form action="<?php $_SERVER['PHP_SELF'] . "s=resetpassword"?>" method="POST" class="add" autocomplete="off">
+                        <input type="email" name="companyemail" id="re" placeholder="Company Email" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($fn != null) echo "value='".$fn['email']."'>" . "<h4 class='nptrrs'>".$fn['company_email']."</h4>"; echo ">"?>
+                              <button type="button" class='submit' id="resubmit" onclick="resetpassword()" style='width:16%;'>Reset Password</button>
+                        </form>
+                         
+                        <a href="./add.php?s=signin" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Don't have an account yet? Create one!</a>
+                  </center>
+                  <p id="reerrors"> </p>
+            </div>
+      <?php } ?>
 
-      <!-- END SIGN IN -->
+      
 <!-- Scripts -->
 <script src="js/add.js"></script>
 <?php include './view/footer.php'?>

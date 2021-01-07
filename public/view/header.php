@@ -11,6 +11,7 @@
                               <center>
                                     <div class="company_name"><?= $_SESSION['cmpn_name']?></div>
                                     <div class="signout"><a href="./signout.php">Sign Out</a></div>
+                                    <div class="myvacancy"><a href="./index.php?m=mv">My Vacancies</a></div>
                               </center>
                               </div>
                               

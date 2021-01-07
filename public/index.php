@@ -50,10 +50,24 @@ session_start()
                               <h3>Publish Date</h3>
                         </div>
                         <?php 
-                        if(count($_GET) == 0) {
-                        foreach($vacas->show() as $v){
-                              $date =  explode("-", $v['publish_date']);
-                              $m = $date[1]; $d = $date[2];
+                              if(count($_GET) == 1 && $_GET['m'] == "mv") {
+                              foreach($vacas->myvacas() as $v){
+                                    $date =  explode("-", $v['publish_date']);
+                                    $m = $date[1]; $d = $date[2];
+                        ?>
+                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                              <div class='works-vacancies'>
+                                    <h3><?= $v['vacancy_name']?></h3>
+                                    <h3><?= $v['company_name']?></h3>
+                                    <h3><?= date("d". strtotime($d)) . " " . DateTime::createFromFormat('!m', date('m', strtotime($m)))->format('F')?></h3>
+                              </div>
+                        </a>
+                        <?php } }?>
+                        <?php 
+                              if(count($_GET) == 0) {
+                              foreach($vacas->show() as $v){
+                                    $date =  explode("-", $v['publish_date']);
+                                    $m = $date[1]; $d = $date[2];
                         ?>
                          <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
