@@ -1,6 +1,8 @@
 <?php
 require_once "../functions.php";
+
 $fn = new Functions();
+$fn->delete_password_reset_links();
 $fn->delete();
 session_start();
 ?>

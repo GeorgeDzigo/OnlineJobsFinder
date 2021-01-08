@@ -33,7 +33,7 @@ class Functions extends DB{
             $sql->bindValue(":info", $info);
             // DATE
                   $sql->bindValue(":pd", $date);
-                  $sql->bindValue(":ed", date('Y-m-d', strtotime($date. ' + 1 days')));
+                  $sql->bindValue(":ed", date('Y-m-d', strtotime($date. ' + 7 days')));
             $sql->bindValue(":vi", id(8));
             $sql->bindValue(':cn', $cn);
             $sql->bindValue(':ci', $ci);
@@ -101,16 +101,6 @@ class Functions extends DB{
             }
       }
 
-      public function delete() {
-            $sql = $this->pdo()->query("SELECT expiration_date FROM vacancies");
-            $date = date("Y-m-d");
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                  if($date == $row['expiration_date']) {
-                        $del = $this->pdo()->query("DELETE FROM vacancies");
-                        $del->execute();
-                  }
-            }
-      }
       // CHECK AND REGISTER FUNCTION
       protected $errors = [];
 
@@ -185,7 +175,7 @@ class Functions extends DB{
                   $sql->bindValue(":cpi", $this->ui);
                   $sql->bindValue(":rpl", $this->linkcreator());
                   $sql->bindValue(":lcd", $date);
-                  $sql->bindValue(":led", date('Y-m-d', strtotime($date. ' + 1 days')));
+                  $sql->bindValue(":led", date('Y-m-d', strtotime($date. ' + 3 days')));
                   $sql->execute();
                   $this->sendemails($this->cn, $cemail); 
                   echo "Email has been sent succesfully";
@@ -250,7 +240,26 @@ class Functions extends DB{
             }
       }     
       if ($this->pdo()->query("UPDATE companies SET company_password = '$newpassword' WHERE company_name = '$company_name'")) echo "SUCCESS";
-
-     
    }
+
+      public function delete_password_reset_links(){
+            $date = date("Y-m-d");
+            $sql = $this->pdo()->query("SELECT id, link_expiration_date FROM resetpassword");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['link_expiration_date'] == $date) {
+                        $this->pdo()->query("DELETE FROM resetpassword WHERE id = $row[id]");
+                  }
+            }
+            $this->pdo()->query("DELETE FROM resetpassword");
+      }
+
+      public function delete() {
+            $sql = $this->pdo()->query("SELECT id, expiration_date FROM vacancies");
+            $date = date("Y-m-d");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($date == $row['expiration_date']) {
+                        $this->pdo()->query("DELETE FROM vacancies WHERE id = " . $row['id']);
+                  }
+            }
+      }
 }

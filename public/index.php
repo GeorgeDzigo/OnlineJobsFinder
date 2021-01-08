@@ -2,7 +2,8 @@
 require_once "../functions.php";
 $vacas = new Functions();
 $vacas->delete();
-session_start()
+$vacas->delete_password_reset_links();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
