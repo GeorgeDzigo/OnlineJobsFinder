@@ -120,7 +120,6 @@ function resetpassword() {
             let errors = [];
             errors = [];
             perrors.innerHTML = '';
-      
             inputs.forEach(v => {
                   if (v.value == "") {
                         btn.type = "button";
@@ -139,9 +138,8 @@ function resetpassword() {
                                     btn.type = "button";
                                     errors.push(v.name);
                                     perrors.innerHTML += "<li>Please Enter Valid Email</li>";
-                              }
+                              } else btn.type = 'submit';
                         }
-                  else if(errors.length == 0) btn.type = "submit";
             });
       }
 }

@@ -154,4 +154,103 @@ class Functions extends DB{
                   }
             }
       }
+      // Password reset side
+      public function linkcreator() {
+            $chars = str_split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-", 1);shuffle($chars);
+            return join("", array_slice($chars, 0, 33));
+      }  
+      protected $email = "";
+      protected $cn = "";
+      protected $ui = "";
+      public function resetpass($cemail) {
+            $getem = $this->pdo()->query("SELECT company_name, company_email, unique_id FROM companies");
+            while($row = $getem->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_email'] == $cemail)  {
+                        $this->email = $row['company_email'];
+                        $this->cn = $row['company_name'];
+                        $this->ui = $row['unique_id'];
+                        break;
+                  }
+            }
+            $d = "";
+            if(strlen($this->email) == 0 ) {
+                  $d = "Email Can Not Be Found";
+                  echo $d;
+            }
+            else {
+                  $date = date("Y")."-".date("m")."-".date("d");
+                  $sql = $this->pdo()->prepare("INSERT INTO resetpassword (company_name, company_unique_id, reset_password_link, link_creation_date, link_expiration_date)
+                        VALUES (:cn, :cpi, :rpl, :lcd, :led)");
+                  $sql->bindValue(":cn", $this->cn);
+                  $sql->bindValue(":cpi", $this->ui);
+                  $sql->bindValue(":rpl", $this->linkcreator());
+                  $sql->bindValue(":lcd", $date);
+                  $sql->bindValue(":led", date('Y-m-d', strtotime($date. ' + 1 days')));
+                  $sql->execute();
+                  $this->sendemails($this->cn, $cemail); 
+                  echo "Email has been sent succesfully";
+           }
+      }
+
+      // Sending Emails
+      protected $password_link = '';
+
+      public function sendemails($cname, $cemail) {
+            $sql = $this->pdo()->query("SELECT company_name, reset_password_link FROM resetpassword");
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_name'] == $cname) {
+                        $this->password_link = $row['reset_password_link'];
+                        break;
+                  }
+            }
+
+
+
+      // subject
+      $subject = 'Password Reset';
+
+      $message = '
+      <html>
+      <head>
+        <title>Birthday Reminders for August</title>
+      </head>
+      <body>
+      <h3>Click the link below to change the password</h3>
+      <a href=http://localhost/OnlineJobsFinder/public/reset.php?v='.$this->password_link.'>Click Me To Reset The Password</a>
+      </body>
+      </html>
+      ';
+
+      // To send HTML mail, the Content-type header must be set
+      $headers  = 'MIME-Version: 1.0' . "\r\n";
+      $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+
+      $headers .= 'From: OnlineJobsFinder' . "\r\n";
+      // Mail it
+      mail($cemail, $subject, $message, $headers);
+      
+   }
+   protected $link = "";
+   protected $uniq_id = "";
+   public function checkLinkAndReset($l, $newpassword) {
+      $sql = $this->pdo()->query('SELECT company_name, company_unique_id, reset_password_link FROM resetpassword');
+      while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            if($row['reset_password_link'] == $l) {
+                  $this->link = $l;
+                  $this->uniq_id = $row['company_unique_id'];
+            }
+      }
+
+      $sql2 = $this->pdo()->query('SELECT company_name, unique_id FROM companies');
+      while($row2 = $sql2->fetch(PDO::FETCH_ASSOC)) {
+            if($row2['unique_id'] == $this->uniq_id) {
+                  $company_name = $row2['company_name'];
+                  break;
+            }
+      }     
+      if ($this->pdo()->query("UPDATE companies SET company_password = '$newpassword' WHERE company_name = '$company_name'")) echo "SUCCESS";
+
+     
+   }
 }
