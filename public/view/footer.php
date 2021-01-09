@@ -1,3 +1,3 @@
-<script src="js/profiledropdown.js"></script>
+<script src="../js/profiledropdown.js"></script>
 </body>
 </html>
