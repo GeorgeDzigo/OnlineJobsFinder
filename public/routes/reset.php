@@ -1,5 +1,5 @@
 <?php
-require_once "../functions.php";
+require_once "../../functions.php";
 
 $fn = new Functions();
 $fn->delete_password_reset_links();
@@ -13,12 +13,12 @@ session_start();
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <!-- STYLES -->
-      <link rel="stylesheet" href="css/index.css">
-      <link rel="stylesheet" href="css/reset.css">
+      <link rel="stylesheet" href="../css/index.css">
+      <link rel="stylesheet" href="../css/reset.css">
       
-      <link rel="stylesheet" href="css/add.css">
+      <link rel="stylesheet" href="../css/add.css">
 
-      <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../fa/css/font-awesome.min.css">
 
       <!-- FONT -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -28,7 +28,7 @@ session_start();
       <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include './view/header.php'?>
+<?php include '../view/header.php'?>
 
 <?php if(count($_SESSION) == 0) { 
       $link = $_GET['v'];
@@ -53,4 +53,4 @@ session_start();
             </div>
 <!-- End reset password -->
 <?php } ?>
-<?php include './view/footer.php'?>
+<?php include '../view/footer.php'?>

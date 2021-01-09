@@ -1,5 +1,5 @@
 <?php
-require_once "../functions.php";
+require_once "../../functions.php";
 $vacas = new Functions();
 $vacas->delete();
 $vacas->delete_password_reset_links();
@@ -12,12 +12,12 @@ session_start();
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <!-- STYLES -->
-      <link rel="stylesheet" href="css/index.css">
-      <link rel="stylesheet" href="css/reset.css">
+      <link rel="stylesheet" href="../css/index.css">
+      <link rel="stylesheet" href="../css/reset.css">
       
-      <link rel="stylesheet" href="css/add.css">
+      <link rel="stylesheet" href="../css/add.css">
 
-      <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../fa/css/font-awesome.min.css">
 
       <!-- FONT -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -27,7 +27,7 @@ session_start();
       <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include './view/header.php'?>
+<?php include '../view/header.php'?>
       <section class="search-job">
             <p id="error"></p>
             <center>
@@ -56,7 +56,7 @@ session_start();
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
                                     <h3><?= $v['company_name']?></h3>
@@ -70,7 +70,7 @@ session_start();
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
                                     <h3><?= $v['company_name']?></h3>
@@ -85,7 +85,7 @@ session_start();
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                               
                                     <h3><?= $v['vacancy_name']?></h3>
@@ -100,6 +100,6 @@ session_start();
             </section>
       <!-- END WORKS -->
 <!-- scripts -->
-<script src="js/index.js"></script>
+<script src="../js/index.js"></script>
 <!-- end scripts -->
-<?php include './view/footer.php'?>
+<?php include '../view/footer.php'?>
