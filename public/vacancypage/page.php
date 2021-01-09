@@ -1,5 +1,5 @@
 <?php
-require_once '../../functions.php';
+require_once '../../classes/functions.php';
 $data = new Functions();
 $data = $data->vacashow($_GET['id']);
 ?>

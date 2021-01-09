@@ -1,5 +1,5 @@
 <?php
-require_once "../../functions.php";
+require_once "../../classes/functions.php";
 $vacas = new Functions();
 $vacas->delete();
 $vacas->delete_password_reset_links();

@@ -22,7 +22,7 @@
 </head>
 <body>
       <?php include '../view/header.php';
-      require_once '../../functions.php';
+      require_once "../../classes/functions.php";
       $fn = new Functions();
       $fn->delete_password_reset_links();
       ?>
