@@ -1,5 +1,5 @@
 <?php
-class DB  {
+class DB {
       protected $dbname = "onlinejobsfinder";
       protected $username = "root";
       protected $password = "gabogio210";

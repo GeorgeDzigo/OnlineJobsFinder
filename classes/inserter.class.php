@@ -1,5 +1,5 @@
 <?php
-require_once '../cn.php';
+require_once 'cn.php';
 function id($n) {
       $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       $str = str_split($str, 1);

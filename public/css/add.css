@@ -67,6 +67,15 @@
                   font-size: 20px;
                   font-weight: bold;
             }
+            .success {
+                  padding: 50px;
+                  background-color: lightgreen;
+                  width: 38%;
+                  font-size: 117%;
+                  font-family: -webkit-pictograph;
+                  border-radius: 2px;
+                  line-height: 1em;
+            }
       /* END ERRORS */
 
 /* END REGISTER */

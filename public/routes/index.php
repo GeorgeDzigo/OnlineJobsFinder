@@ -1,9 +1,15 @@
 <?php
-require_once "../../classes/functions.php";
-$vacas = new Functions();
-$vacas->delete();
-$vacas->delete_password_reset_links();
-session_start();
+      session_start();
+      // Including Classes
+      require_once "../../classes/functions.class.php";
+      require_once '../../classes/getter.class.php';
+      // Classes Def Clld Funcs 
+        // getter.class.php
+            $get = new Getter();   
+        // functions.class.php    
+            $fun = new Functions();
+            $fun->delete();
+            $fun->delete_password_reset_links();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +58,7 @@ session_start();
                         </div>
                         <?php 
                               if(count($_GET) == 1 && $_GET['m'] == "mv") {
-                              foreach($vacas->myvacas() as $v){
+                              foreach($get->myvacas() as $v){
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
@@ -66,7 +72,7 @@ session_start();
                         <?php } }?>
                         <?php 
                               if(count($_GET) == 0) {
-                              foreach($vacas->show() as $v){
+                              foreach($get->show() as $v){
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
@@ -80,7 +86,7 @@ session_start();
                         <?php 
                         }}
                         else {
-                              $vacas = $vacas->vacaByKeywords($_GET['s'] == "-" ? 0 : $_GET['s'], $_GET['c'] == null ? 0 : $_GET['c']);
+                              $vacas = $get->vacaByKeywords($_GET['s'] == "-" ? 0 : $_GET['s'], $_GET['c'] == null ? 0 : $_GET['c']);
                               foreach($vacas as $v) {
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];

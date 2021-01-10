@@ -1,15 +1,14 @@
 <?php
-include_once '../cn.php';
+require_once 'cn.php';
 
-
-class Functions extends DB{
+class Functions extends DB {
       /*
        *    FUNCTION NAME: linkcreator()
        *    DESC: THIS FUNCTION CREATES PASSWORD
        *          RESET LINK FOR THE USER, AND 
        *          RETURNS THE LINK
        */ 
-            public function linkcreator() {
+      protected function linkcreator() {
             $chars = str_split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-", 1);shuffle($chars);
             return join("", array_slice($chars, 0, 33));
       }  
@@ -28,12 +27,12 @@ class Functions extends DB{
             $getem = $this->pdo()->query("SELECT company_name, company_email, unique_id FROM companies");
             while($row = $getem->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_email'] == $cemail)  {
-                        $this->info['email'] = $row['company_email'];
-                        $this->cn['name'] = $row['company_name'];
-                        $this->ui['uniq_id'] = $row['unique_id'];
+                        $this->info[] = $row['company_email'];
+                        $this->info[] = $row['company_name'];
+                        $this->info[] = $row['unique_id'];
                   }
-                  return $this->info;
             }
+            return $this->info;
       }
 
       
@@ -44,9 +43,8 @@ class Functions extends DB{
       */ 
       public function resetpass($cemail) {
             $d = "";
-            $info = $this->checkforEmail($cemail);
-            
-            if(strlen($info['email']) == 0 ) {
+            $info = $this->checkforEmail("mr.georgegamertv@gmail.com");
+            if(strlen($info[0]) == 0 ) {
                   $d = "Email Can Not Be Found";
                   echo $d;
             }
@@ -54,13 +52,13 @@ class Functions extends DB{
                   $date = date("Y")."-".date("m")."-".date("d");
                   $sql = $this->pdo()->prepare("INSERT INTO resetpassword (company_name, company_unique_id, reset_password_link, link_creation_date, link_expiration_date)
                         VALUES (:cn, :cpi, :rpl, :lcd, :led)");
-                  $sql->bindValue(":cn", $info['name']);
-                  $sql->bindValue(":cpi", $info['uniq_id']);
+                  $sql->bindValue(":cn", $info[1]);
+                  $sql->bindValue(":cpi", $info[2]);
                   $sql->bindValue(":rpl", $this->linkcreator());
                   $sql->bindValue(":lcd", $date);
                   $sql->bindValue(":led", date('Y-m-d', strtotime($date. ' + 3 days')));
                   $sql->execute();
-                  $this->sendemails($info['name'], $cemail); 
+                  $this->sendemails($info[1], $cemail); 
                   echo "Email has been sent succesfully";
            }
       }
@@ -71,9 +69,6 @@ class Functions extends DB{
       *     DESC: THIS FUNCTON TAKES company's name as a parameter
       *           AND RETURNS IT'S RESEST PASSWORD LINK (FROM resetpassword TABLE)
       */ 
-
-      protected $password_link = '';
-
       protected function passlink($cname){
             $sql = $this->pdo()->query("SELECT company_name, reset_password_link FROM resetpassword");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
@@ -100,7 +95,7 @@ class Functions extends DB{
       </head>
       <body>
       <h3>Click the link below to change the password</h3>
-      <a href=http://localhost/OnlineJobsFinder/public/reset.php?v='.$link.'>Click Me To Reset The Password</a>
+      <a href=http://localhost/OnlineJobsFinder/public/routes/reset.php?v='.$link.'>Click Me To Reset The Password</a>
       </body>
       </html>
       ';
@@ -140,9 +135,9 @@ class Functions extends DB{
             while($row2 = $sql2->fetch(PDO::FETCH_ASSOC)) {
                   if($row2['unique_id'] == $this->uniq_id) {
                         $company_name = $row2['company_name'];
-                        break;
+                        
                   }
-            }     
+            }  
             if ($this->pdo()->query("UPDATE companies SET company_password = '$newpassword' WHERE company_name = '$company_name'")) echo "SUCCESS";
       }
 
@@ -160,7 +155,6 @@ class Functions extends DB{
                         $this->pdo()->query("DELETE FROM resetpassword WHERE id = $row[id]");
                   }
             }
-            $this->pdo()->query("DELETE FROM resetpassword");
       }
 
       

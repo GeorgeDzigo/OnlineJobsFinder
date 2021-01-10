@@ -1,10 +1,13 @@
 <?php
-require_once "../../classes/functions.php";
-
-$fn = new Functions();
-$fn->delete_password_reset_links();
-$fn->delete();
 session_start();
+      // Including Classes
+            require_once "../../classes/functions.class.php";
+      // Classes Def Clld Funcs
+            // functions.class.php
+            $fn = new Functions();
+            $fn->delete_password_reset_links();
+            $fn->delete();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +37,6 @@ session_start();
       $link = $_GET['v'];
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $fn->checkLinkAndReset($link, $_POST['password']);
-            
       }      
 ?>
 <!-- Reset Password -->

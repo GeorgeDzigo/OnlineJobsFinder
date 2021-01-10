@@ -1,5 +1,5 @@
 <?php
-require_once '../cn.php';
+require_once 'cn.php';
 class Getter extends DB {
       /*
       *     FUNCTION NAME: show()
@@ -7,7 +7,7 @@ class Getter extends DB {
       *            AND RETURNS IT AS AN ARRAY
       *            FROM vacancies TABLE
       */ 
-      
+
       protected $datas = [];
       public function show() {
             $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date FROM vacancies");
