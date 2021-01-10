@@ -206,6 +206,15 @@
             /* END PROFILE DROPDOWN */
 /* END PROFILE CSS */
 
+/* VACANCY DESIGN CHANGE */
+/* .container {
+      background-color: black;
+      width: 259px;
+      height: 298px;
+      margin-top: 10px;
+}  */
+/* END VACANCY DESIGN CHANGE */
+
 /* ANIMATIONS */
 @keyframes dropdown {
       from{background-color:#F8F8F8;}

@@ -40,11 +40,20 @@
 </head>
 <body>
 
-
       
       <?php
-            if(count($_SESSION) == 1 && $_GET['s'] != "publish") header("Location: ./add.php?s=publish");
-            if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
+      if(count($_SESSION) == 1 && $fun->checkverify($_SESSION['cmpn_name']) == 0 && $_GET['s'] == "publish") {
+      ?>
+      <!-- For unverified Accounts -->
+      <center style="margin-top: 7%;">    
+            <pre class="success">
+You need to verify your account to publish vacancy
+            </pre>
+      </center>
+      <!-- End for unverified Accounts -->
+      <?php }
+            else if(count($_SESSION) == 1 && $_GET['s'] != "publish") header("Location: ./add.php?s=publish");
+            else if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
                   if($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $ins->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_SESSION['cmpn_name']);
                         echo '<script>window.location.replace("./index.php")</script>';

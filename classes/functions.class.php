@@ -172,4 +172,19 @@ class Functions extends DB {
                   }
             }
       }
+
+      /*
+      *     FUNCTION NAME: checkverify()
+      *     DESC: THIS FUNCTION CHECKS IF ACCOUNT
+      *           IS VERIFIED. IF ACCOUNT IS VERIFIED 
+      *           FUNCTION WILL RETURN 1 ELSE, WILL RETURN 0
+      */ 
+      
+      public function checkverify($cname) {
+            $v = $this->pdo()->query("SELECT company_name, verified FROM companies");
+            while($row = $v->fetch(PDO::FETCH_ASSOC)) {
+                  if($cname == $row['company_name'] && $row['verified'] == 0) return 0;
+                  else return 1;
+            }
+      }
 }

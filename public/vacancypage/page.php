@@ -1,7 +1,11 @@
 <?php
-require_once '../../classes/functions.php';
-$data = new Functions();
-$data = $data->vacashow($_GET['id']);
+      // Including Classes
+            require_once '../../classes/functions.class.php';
+            require_once '../../classes/getter.class.php';
+      // Classes Deg Clld Functions
+            // getter.class.php
+                  $get = new Getter();
+$get = $get->vacashow($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +33,7 @@ $data = $data->vacashow($_GET['id']);
 <body>
       <!-- HEADER -->
             <header class="header">
-                  <h1 class='logo'><a href=".././index.php">Jobs Finder</h1>
+                  <h1 class='logo'><a href="../routes/index.php">Jobs Finder</h1>
 
                   <nav class="nav">
                         <li class="nav-li"> <a href="../index.php" class="nav-li-a">Vacancies</a></li>
@@ -42,11 +46,11 @@ $data = $data->vacashow($_GET['id']);
 
       <section class="vacainfo">
             <div class="vacainfo-info">
-                  <h3>Vacancy name: <i><?= $data[0]["vacancy_name"]?></i></h3>
-                  <h3>Company: <i><?= $data[0]["company_name"]?></i></h3>
+                  <h3>Vacancy name: <i><?= $get[0]["vacancy_name"]?></i></h3>
+                  <h3>Company: <i><?= $get[0]["company_name"]?></i></h3>
             </div>
             
-            <pre class="info"><?=$data[0]["info"]?></pre>
+            <pre class="info"><?=$get[0]["info"]?></pre>
       </section>
       <center class="center"><hr style="width: 97%; background-color: lightgrey;">
       <footer class='footer'>© jobfinder.com. all rights reserved</footer>
