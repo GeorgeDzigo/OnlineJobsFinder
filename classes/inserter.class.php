@@ -9,13 +9,39 @@ function id($n) {
 }
 class Inserting extends DB {
       /*
+      *     FUNCTION NAME: img_upload()
+      *     DESC: THIS FUNCTION TAKES IMG FILE, 
+      *           WILL CHECK FILE TYPE, SIZE AND 
+      *           WILL MOVE TO UPLOADS FILE AND 
+      *           WILL RETURN THE LINK/PATH.
+      */ 
+      protected function img_upload($img) {
+            $format = end(explode('.', $img['name']));
+            $allowed = ['jpeg', "jpg", "png"];
+            if(in_array($format, $allowed)) {
+                  if($img['size'] < 600000) {
+                        $filename = uniqid('', true) .'.'. $format;
+                        $newdest = '../uploads/' . $filename;
+                        move_uploaded_file($img['tmp_name'], $newdest);
+                        return $newdest;
+                  }
+                  else {
+                        echo "Too Big Img";
+                  }
+            } else {
+                  echo "Please Select PNG, JPEG or JPG format files only";
+            }
+      }
+
+
+      /*
       *     FUNCTION NAME: insert()
       *     DESC: THIS FUNCTION INSERTS VACANCY
       *           IN vacancies TABLE
       *
       */
 
-      public function insert($fname, $lname, $vname, $category, $keywords, $info, $cname) {
+      public function insert($fname, $lname, $vname, $category, $keywords, $info, $img, $cname) {
             $cmtable = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
             while($row = $cmtable->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_name'] == $cname){
@@ -24,14 +50,15 @@ class Inserting extends DB {
                   }
             }
             $date = date("Y")."-".date("m")."-".date("d");
-            $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, vacancy_name, vacancy_category, keywords, info, publish_date, expiration_date, vacancy_id, company_name, company_id)
-            values(:fn, :ln, :vn, :vc, :ke, :info, :pd, :ed, :vi, :cn, :ci)");
+            $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, vacancy_name, vacancy_category, keywords, info, logo_lnk, publish_date, expiration_date, vacancy_id, company_name, company_id)
+            values(:fn, :ln, :vn, :vc, :ke, :info, :ll, :pd, :ed, :vi, :cn, :ci)");
             $sql->bindValue(":fn", $fname);
             $sql->bindValue(":ln", $lname);
             $sql->bindValue(":vn", $vname);
             $sql->bindValue(":vc", $category);
             $sql->bindValue(":ke", $keywords);
             $sql->bindValue(":info", $info);
+            $sql->bindValue(":ll", $this->img_upload($img));
             // DATE
                   $sql->bindValue(":pd", $date);
                   $sql->bindValue(":ed", date('Y-m-d', strtotime($date. ' + 7 days')));

@@ -55,16 +55,17 @@ You need to verify your account to publish vacancy
             else if(count($_SESSION) == 1 && $_GET['s'] != "publish") header("Location: ./add.php?s=publish");
             else if(count($_SESSION) == 1 && $_GET['s'] == 'publish') { 
                   if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $ins->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_SESSION['cmpn_name']);
+                        $ins->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_FILES['file'],$_SESSION['cmpn_name']);
                         echo '<script>window.location.replace("./index.php")</script>';
                   }
       ?><!-- PUBLISH  -->
             <div class="formholder">
+            
                   <div class="headersholder">
                         <h1 class="headersholder-h1">Fill Your Vacancy</h1>
                   </div>
                   <center>
-                        <form action="<?php echo $_SERVER['PHP_SELF'] . "?s=publish";?>" method="POST" class="add" autocomplete="off">
+                        <form action="<?php echo $_SERVER['PHP_SELF'] . "?s=publish";?>" method="POST" class="add" autocomplete="off" enctype="multipart/form-data">
                               <input type="text" name="firstname" id="in" placeholder="First Name" style='width: 15%; display: inline-block'>
                               <input type="text" name="lastname" id="in" placeholder="Last Name" style="width:15%; display: inline-block">
                               <div></div>
@@ -79,12 +80,33 @@ You need to verify your account to publish vacancy
                               </select>
                               <!-- End CATEGORY -->
                               <input type="text" id="in" placeholder="Keywords" name="keywords">
+                              <div class="img-upload">
+                                    <!-- actual upload which is hidden -->
+                                    <input type="file" id="actual-btn" name="file" style="visibility: hidden">
+
+                                    <!-- our custom upload button -->
+                                    <label for="actual-btn" class="label">Choose File</label>
+
+                                    <!-- name of file chosen -->
+                                    <span id="file-chosen">No file chosen</span>
+                              </div>
                               <textarea name="info" id="in" class='info' placeholder="Requirements"></textarea>
                               <button type="button" class='submit' id="submit" onclick='inputChecker()'>Submit</button>
+                              
                         </form>
+                        
                   </center>
                   <p id="errors"> </p>
             </div>
+            <script> 
+                  const actualBtn = document.getElementById('actual-btn');
+
+                  const fileChosen = document.getElementById('file-chosen');
+
+                  actualBtn.addEventListener('change', function(){
+                  fileChosen.textContent = this.files[0].name
+                  })
+            </script>
             <!-- END PUBLISH -->
       <?php }
       

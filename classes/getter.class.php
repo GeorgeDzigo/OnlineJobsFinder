@@ -10,7 +10,7 @@ class Getter extends DB {
 
       protected $datas = [];
       public function show() {
-            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date FROM vacancies");
+            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, logo_lnk FROM vacancies");
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
             return $this->datas;
       }
@@ -37,7 +37,7 @@ class Getter extends DB {
       protected $myvacas = [];
 
       public function myvacas() {
-            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, company_id FROM VACANCIES");
+            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, company_id, logo_lnk FROM vacancies");
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_id'] === $this->get_unique_id($_SESSION['cmpn_name'])) {
                         array_pop($row);
@@ -55,7 +55,7 @@ class Getter extends DB {
       protected $vdata = [];
 
       public function vacashow($id) {
-            $sql = $this->pdo()->query("SELECT company_name, vacancy_name, info FROM vacancies where id = " . $id);
+            $sql = $this->pdo()->query("SELECT company_name, vacancy_name, info, logo_lnk FROM vacancies where id = " . $id);
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
             return $this->vdata;
       }
@@ -77,7 +77,7 @@ class Getter extends DB {
 
       public function vacaByKeywords($s = '', $c = '') {
             if($s != 0 && $c == 0) {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies");
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies");
                   $s = join(" ",explode("-", strtolower($s)));
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                         $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
@@ -88,12 +88,12 @@ class Getter extends DB {
                   return $this->vacas;
             }
             else if($s == 0 && $c != 0) {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies WHERE '$c' = vacancy_category");
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vacas[] = $row;
                   return $this->vacas;
             }
             else {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords FROM vacancies WHERE '$c' = vacancy_category");
+                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
                   $s = join(" ",explode("-", strtolower($s)));
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                         $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));

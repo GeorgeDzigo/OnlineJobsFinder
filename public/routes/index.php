@@ -65,7 +65,7 @@
                          <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
-                                    <h3><?= $v['company_name']?></h3>
+                                    <h3><img src="<?=$v['logo_lnk']?>" width="50"><?= $v['company_name']?></h3>
                                     <h3><?= date("d". strtotime($d)) . " " . DateTime::createFromFormat('!m', date('m', strtotime($m)))->format('F')?></h3>
                               </div>
                         </a>
@@ -79,7 +79,7 @@
                          <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
-                                    <h3><?= $v['company_name']?></h3>
+                                    <h3><img src="<?=$v['logo_lnk']?>" width="50"><?= $v['company_name']?></h3>
                                     <h3><?= date("d". strtotime($d)) . " " . DateTime::createFromFormat('!m', date('m', strtotime($m)))->format('F')?></h3>
                               </div>
                         </a>
@@ -95,7 +95,7 @@
                               <div class='works-vacancies'>
                               
                                     <h3><?= $v['vacancy_name']?></h3>
-                                    <h3><?= $v['company_name']?></h3>
+                                    <h3><img src="<?=$v['logo_lnk']?>" width="50"><?= $v['company_name']?></h3>
                                     <h3><?= date("d". strtotime($d)) . " " . DateTime::createFromFormat('!m', date('m', strtotime($m)))->format('F')?></h3>
                                     
                               </div>
