@@ -24,7 +24,7 @@ class Functions extends DB {
       */
       protected $info = [];
       protected function checkforEmail($cemail){
-            $getem = $this->pdo()->query("SELECT company_name, company_email, unique_id FROM companies");
+            $getem = $this->cmp()->query("SELECT company_name, company_email, unique_id FROM companies");
             while($row = $getem->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_email'] == $cemail)  {
                         $this->info[] = $row['company_email'];
@@ -50,7 +50,7 @@ class Functions extends DB {
             }
             else {
                   $date = date("Y")."-".date("m")."-".date("d");
-                  $sql = $this->pdo()->prepare("INSERT INTO resetpassword (company_name, company_unique_id, reset_password_link, link_creation_date, link_expiration_date)
+                  $sql = $this->cmp()->prepare("INSERT INTO resetpassword (company_name, company_unique_id, reset_password_link, link_creation_date, link_expiration_date)
                         VALUES (:cn, :cpi, :rpl, :lcd, :led)");
                   $sql->bindValue(":cn", $info[1]);
                   $sql->bindValue(":cpi", $info[2]);
@@ -70,7 +70,7 @@ class Functions extends DB {
       *           AND RETURNS IT'S RESEST PASSWORD LINK (FROM resetpassword TABLE)
       */ 
       protected function passlink($cname){
-            $sql = $this->pdo()->query("SELECT company_name, reset_password_link FROM resetpassword");
+            $sql = $this->cmp()->query("SELECT company_name, reset_password_link FROM resetpassword");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_name'] == $cname) return $row['reset_password_link'];
             }
@@ -123,7 +123,7 @@ class Functions extends DB {
       protected $uniq_id = "";
 
       public function checkLinkAndReset($l, $newpassword) {
-            $sql = $this->pdo()->query('SELECT company_name, company_unique_id, reset_password_link FROM resetpassword');
+            $sql = $this->cmp()->query('SELECT company_name, company_unique_id, reset_password_link FROM resetpassword');
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($row['reset_password_link'] == $l) {
                         $this->link = $l;
@@ -131,14 +131,14 @@ class Functions extends DB {
                   }
             }
 
-            $sql2 = $this->pdo()->query('SELECT company_name, unique_id FROM companies');
+            $sql2 = $this->cmp()->query('SELECT company_name, unique_id FROM companies');
             while($row2 = $sql2->fetch(PDO::FETCH_ASSOC)) {
                   if($row2['unique_id'] == $this->uniq_id) {
                         $company_name = $row2['company_name'];
                         
                   }
             }  
-            if ($this->pdo()->query("UPDATE companies SET company_password = '$newpassword' WHERE company_name = '$company_name'")) echo "SUCCESS";
+            if ($this->cmp()->query("UPDATE companies SET company_password = '$newpassword' WHERE company_name = '$company_name'")) echo "SUCCESS";
       }
 
       /*
@@ -149,10 +149,10 @@ class Functions extends DB {
 
       public function delete_password_reset_links(){
             $date = date("Y-m-d");
-            $sql = $this->pdo()->query("SELECT id, link_expiration_date FROM resetpassword");
+            $sql = $this->cmp()->query("SELECT id, link_expiration_date FROM resetpassword");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($row['link_expiration_date'] == $date) {
-                        $this->pdo()->query("DELETE FROM resetpassword WHERE id = $row[id]");
+                        $this->cmp()->query("DELETE FROM resetpassword WHERE id = $row[id]");
                   }
             }
       }
@@ -164,11 +164,11 @@ class Functions extends DB {
       *           AFTER SPECIFIC AMOUNTS OF DAYS/IT GETS EXPIRED
       */ 
       public function delete() {
-            $sql = $this->pdo()->query("SELECT id, expiration_date FROM vacancies");
+            $sql = $this->cmp()->query("SELECT id, expiration_date FROM vacancies");
             $date = date("Y-m-d");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($date == $row['expiration_date']) {
-                        $this->pdo()->query("DELETE FROM vacancies WHERE id = " . $row['id']);
+                        $this->cmp()->query("DELETE FROM vacancies WHERE id = " . $row['id']);
                   }
             }
       }
@@ -181,7 +181,7 @@ class Functions extends DB {
       */ 
       
       public function checkverify($cname) {
-            $v = $this->pdo()->query("SELECT company_name, verified FROM companies");
+            $v = $this->cmp()->query("SELECT company_name, verified FROM companies");
             while($row = $v->fetch(PDO::FETCH_ASSOC)) {
                   if($cname == $row['company_name'] && $row['verified'] == 0) return 0;
                   else return 1;

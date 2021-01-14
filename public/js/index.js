@@ -1,3 +1,9 @@
+/*
+*     function name : onbtnclick()
+*     desc: This function checks input fields and
+*           searches for keywords for php and redirects
+*/ 
+
 function onbtnclick() { 
       let input = document.getElementById("search-field").value;
       let error = document.getElementById("error");
@@ -14,5 +20,4 @@ function onbtnclick() {
       else if (input.length == 0 && category != "Category") window.location.replace("../routes/?s=-&c=" + category);
       
       else window.location.replace("../routes/index.php?s=" + input.split("").map(v => v == " " ? "+" : v).join(""));
-      
 }

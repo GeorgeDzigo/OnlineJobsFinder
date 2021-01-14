@@ -19,7 +19,7 @@ class Verify extends DB {
       */ 
       protected function saveVerifyLink($cname,$cemail) {
             $link = $this->linkcreator();
-            $sql = $this->pdo()->prepare("INSERT INTO verify (company_name, company_email, verify_link) VALUES (:cn, :cm, :vl)");
+            $sql = $this->cmp()->prepare("INSERT INTO verify (company_name, company_email, verify_link) VALUES (:cn, :cm, :vl)");
             $sql->bindValue(":cn", $cname);
             $sql->bindValue(':cm', $cemail);
             $sql->bindValue(":vl", $link);
@@ -65,14 +65,14 @@ class Verify extends DB {
       *           ON THE LINK THAT WAS SENT TO ITS EMAIL 
       */ 
       public function verify($l) {
-            $ver = $this->pdo()->query("SELECT * FROM verify");
+            $ver = $this->cmp()->query("SELECT * FROM verify");
             while($row = $ver->fetch(PDO::FETCH_ASSOC)) {
                   if($row['verify_link'] == $l) {
                         $name = $row['company_name'];
                         $email = $row['company_email'];
                   }
             }
-            $this->pdo()->query("UPDATE companies SET verified = 1 WHERE company_name = '$name'");
-            $this->pdo()->query("DELETE FROM verify WHERE company_name = '$name'");
+            $this->cmp()->query("UPDATE companies SET verified = 1 WHERE company_name = '$name'");
+            $this->cmp()->query("DELETE FROM verify WHERE company_name = '$name'");
       }
 }

@@ -8,6 +8,8 @@ function id($n) {
       return join("", $str);
 }
 class Inserting extends DB {
+// ONLINESJOBSFINDERCOMPANIES
+
       /*
       *     FUNCTION NAME: img_upload()
       *     DESC: THIS FUNCTION TAKES IMG FILE, 
@@ -42,7 +44,7 @@ class Inserting extends DB {
       */
 
       public function insert($fname, $lname, $vname, $category, $keywords, $info, $img, $cname) {
-            $cmtable = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
+            $cmtable = $this->cmp()->query("SELECT company_name, unique_id FROM companies");
             while($row = $cmtable->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_name'] == $cname){
                         $cn = $row['company_name'];
@@ -50,7 +52,7 @@ class Inserting extends DB {
                   }
             }
             $date = date("Y")."-".date("m")."-".date("d");
-            $sql = $this->pdo()->prepare("INSERT INTO vacancies (first_name, last_name, vacancy_name, vacancy_category, keywords, info, logo_lnk, publish_date, expiration_date, vacancy_id, company_name, company_id)
+            $sql = $this->cmp()->prepare("INSERT INTO vacancies (first_name, last_name, vacancy_name, vacancy_category, keywords, info, logo_lnk, publish_date, expiration_date, vacancy_id, company_name, company_id)
             values(:fn, :ln, :vn, :vc, :ke, :info, :ll, :pd, :ed, :vi, :cn, :ci)");
             $sql->bindValue(":fn", $fname);
             $sql->bindValue(":ln", $lname);
@@ -78,7 +80,7 @@ class Inserting extends DB {
       */
 
       protected function register($cname,$cpass, $cemail,$pnumber) {
-            $sql = $this->pdo()->prepare("INSERT INTO companies (company_name, company_password, company_email, company_phone, unique_id)
+            $sql = $this->cmp()->prepare("INSERT INTO companies (company_name, company_password, company_email, company_phone, unique_id)
                                                        VALUES (:cn, :cp, :ce, :cphone, :ud)");
             $sql->bindValue(":cn", $cname);
             $sql->bindValue(":cp", $cpass);
@@ -102,7 +104,7 @@ class Inserting extends DB {
       protected $errors = [];
 
       public function checkAnRegister($cname,$cpass, $cemail,$pnumber) {
-            $sql = $this->pdo()->query("SELECT company_name, company_email, company_phone FROM companies");
+            $sql = $this->cmp()->query("SELECT company_name, company_email, company_phone FROM companies");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                         if ($row['company_name'] == $cname) {
                               $this->errors['company_name'] = "Name is already taken"; 
@@ -120,4 +122,9 @@ class Inserting extends DB {
             if(count($this->errors) != 0) return $this->errors;
             else  $this->register($cname, $cpass, $cemail, $pnumber);
       }
+}
+
+class Insert extends DB {
+      // ONLINESJOBSFINDERUSERS
+      public function insert($fname, $lname, $email, $num) {}
 }

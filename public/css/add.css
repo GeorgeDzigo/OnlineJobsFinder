@@ -56,6 +56,16 @@
                         }
                   /* END IMAGE UPLOAD */
             /* END FILE INPUT */
+
+            /* CHANGE TO CMPN-USR REGIST */
+                  .chngrsrcm {
+                        text-decoration: underline;
+                        font-weight: bold;
+                        font-size: 18px;
+                        position: absolute;
+                        margin-top: -18px;
+                    }
+            /* END CHANGE TO CMPN-USR REGIST */
       /* END FORM HOLDER */
 
 /* END ADD.PHP */

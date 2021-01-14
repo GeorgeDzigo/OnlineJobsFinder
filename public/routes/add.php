@@ -127,24 +127,31 @@ You will redirected to main page in 10 seconds
       </center>
                   <?php echo "<script>setTimeout(function() {window.location.replace('./index.php')}, 10000)</script>"; }
             }
-      ?><!-- SIGN UP -->
+      ?>
+      
             <div class="formholder">
+                  <!-- USER COMPANY UP -->
                   <div class="headersholder">
-                        <h1 class="headersholder-h1">Company Registration</h1>
+                       <p id="cmpn_usr"class="headersholder-h1">Company Registration</p>
                   </div>
-                  <center>
+                  <center id="cmpn">
                         <form action="<?php $_SERVER['PHP_SELF'] . "?s=signup"?>" method="POST" class="add" autocomplete="off">
-                              <input type="text" name="companyname" id="re" placeholder="Company Name"  <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($f != null) echo "value='".$fn['name']."'>" . "<h4 class='nptrrs'>".$f['company_name']."</h4>"; echo ">"?>
-                              <input type="email" name="companyemail" id="re" placeholder="Company Email" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($f != null) echo "value='".$fn['email']."'>" . "<h4 class='nptrrs'>".$f['company_email']."</h4>"; echo ">"?>
+                              <input type="text" name="companyname" id="re" placeholder="Company Name"  <?php if($_SERVER['REQUEST_METHOD'] == 'POST') {if($f != null) echo "value='".$fn['name']."'>" . "<h4 class='nptrrs'>".$f['company_name']."</h4>";}else echo ">";?>
+                              <input type="email" name="companyemail" id="re" placeholder="Company Email" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($f != null) {echo "value='".$fn['email']."'>" . "<h4 class='nptrrs'>".$f['company_email']."</h4>";}else echo ">";?>>
                               <input type="password" name="password" id="re" placeholder="Password">
-                              <input type="tel" name="phonenumber" id="re" placeholder="Company Number" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') if($f != null) echo "value='".$fn['phone']."'>" . "<h4 class='nptrrs'>".$f['company_phone']."</h4>"; echo ">"?>
+                              <input type="tel" name="phonenumber" id="re" placeholder="Company Number" <?php if($_SERVER['REQUEST_METHOD'] == 'POST') {if($f != null) echo "value='".$fn['phone']."'>" . "<h4 class='nptrrs'>".$f['company_phone']."</h4>";} 
+                              else echo ">";?>
                               <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
+                              <a href="./usrr/usr.php" class="chngrsrcm">User Registration</a>
                         </form>
                         <a href="./add.php?s=signin" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Have An Account? Sign In Then</a>
                   </center>
-                  <p id="reerrors"> </p>
             </div>
-            <!-- END SIGN UP -->
+
+            <!-- USER SIGN UP -->
+             
+
+
       <?php }?>
 
 

@@ -10,7 +10,7 @@ class Getter extends DB {
 
       protected $datas = [];
       public function show() {
-            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, logo_lnk FROM vacancies");
+            $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, publish_date, logo_lnk FROM vacancies");
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
             return $this->datas;
       }
@@ -24,7 +24,7 @@ class Getter extends DB {
       */ 
 
       protected function get_unique_id($cname) {
-            $sql = $this->pdo()->query("SELECT company_name, unique_id FROM companies");
+            $sql = $this->cmp()->query("SELECT company_name, unique_id FROM companies");
             while($row = $sql->fetch(PDO::FETCH_ASSOC)) if($row['company_name'] == $cname) return $row['unique_id'];
       }
 
@@ -37,7 +37,7 @@ class Getter extends DB {
       protected $myvacas = [];
 
       public function myvacas() {
-            $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, publish_date, company_id, logo_lnk FROM vacancies");
+            $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, publish_date, company_id, logo_lnk FROM vacancies");
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_id'] === $this->get_unique_id($_SESSION['cmpn_name'])) {
                         array_pop($row);
@@ -55,7 +55,7 @@ class Getter extends DB {
       protected $vdata = [];
 
       public function vacashow($id) {
-            $sql = $this->pdo()->query("SELECT company_name, vacancy_name, info, logo_lnk FROM vacancies where id = " . $id);
+            $sql = $this->cmp()->query("SELECT company_name, vacancy_name, info, logo_lnk FROM vacancies where id = " . $id);
             while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
             return $this->vdata;
       }
@@ -77,7 +77,7 @@ class Getter extends DB {
 
       public function vacaByKeywords($s = '', $c = '') {
             if($s != 0 && $c == 0) {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies");
+                  $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies");
                   $s = join(" ",explode("-", strtolower($s)));
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                         $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
@@ -88,12 +88,12 @@ class Getter extends DB {
                   return $this->vacas;
             }
             else if($s == 0 && $c != 0) {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
+                  $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vacas[] = $row;
                   return $this->vacas;
             }
             else {
-                  $sql = $this->pdo()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
+                  $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, keywords, logo_lnk FROM vacancies WHERE '$c' = vacancy_category");
                   $s = join(" ",explode("-", strtolower($s)));
                   while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                         $key = array_values(array_unique(explode(", ",join(" ",explode("-", $row['keywords'])))));
@@ -114,7 +114,7 @@ class Getter extends DB {
       *           companies TABLE AND SETS SESSION
       */ 
       public function signin($cname, $cpass) {
-            $pass = $this->pdo()->query("SELECT company_name, company_password FROM companies");
+            $pass = $this->cmp()->query("SELECT company_name, company_password FROM companies");
             while($row = $pass->fetch(PDO::FETCH_ASSOC)) {
                   if($row['company_name'] == $cname && $row['company_password'] == $cpass) {
                         return $_SESSION['cmpn_name'] = $row['company_name'];
