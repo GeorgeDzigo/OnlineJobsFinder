@@ -7,9 +7,8 @@ function id($n) {
       $str = array_slice($str, 0, $n);
       return join("", $str);
 }
-class Inserting extends DB {
 // ONLINESJOBSFINDERCOMPANIES
-
+class Inserting extends DB {
       /*
       *     FUNCTION NAME: img_upload()
       *     DESC: THIS FUNCTION TAKES IMG FILE, 
@@ -123,8 +122,24 @@ class Inserting extends DB {
             else  $this->register($cname, $cpass, $cemail, $pnumber);
       }
 }
-
+ // ONLINESJOBSFINDERUSERS
 class Insert extends DB {
-      // ONLINESJOBSFINDERUSERS
-      public function insert($fname, $lname, $email, $num) {}
+      /*
+      *     FUNCTION NAME: insert()
+      *     DESC: THIS FUNCTION GETS VALUES
+      *           FROM $_POST SUPERGLOBAL 
+      *           VARIABLE AND INSERTS THEM
+      *           IN users TABLE
+      */
+
+      public function insert($fname, $lname, $email, $num) {
+            $ins = $this->usr()->prepare('INSERT INTO users (user_fname, user_lname, user_email, user_phone, unique_id, verify) VALUES
+                                 (:uf, :ul, :ue, :up, ui, :v)');
+            $ins->bindValue(":uf", $fname);
+            $ins->bindValue(":ul", $lname);
+            $ins->bindValue(":ue", $email);
+            $ins->bindValue(":up", $num);
+            $ins->bindValue(":ui", id(8));
+            $ins->bindValue(":v", 0);
+      }
 }
