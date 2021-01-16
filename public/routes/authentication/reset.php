@@ -1,4 +1,6 @@
 <?php if(count($_SESSION) == 0 && $_GET['s'] == "resetpassword") {
+            require_once '../../classes/functions.class.php';
+            $fun = new Functions();
             // RESET PASSWORD
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                   $fun->resetpass($_POST['companyemail']);

@@ -91,6 +91,20 @@ class Inserting extends DB {
       }
 
 
+
+
+      /*
+      *     FUNCTION NAME: cmpncheck()
+      *     DESC: THIS FUNCTION CHECKS IF GIVEN
+      *           PARAMETERS VALUES ALREADY EXIST
+      *           IN CMPN TABLE
+      */ 
+
+      private function cmpncheck($name, $cpass, $cemail, $pnumber) {
+            $errors = [];
+      }
+
+
       /*
       *     FUNCTION NAME: checkAnRegister()
       *     DESC: THIS FUNCTION TAKES SUBMMITED FORM
@@ -100,26 +114,40 @@ class Inserting extends DB {
       *           
       */
 
-      protected $errors = [];
 
       public function checkAnRegister($cname,$cpass, $cemail,$pnumber) {
-            $sql = $this->cmp()->query("SELECT company_name, company_email, company_phone FROM companies");
-            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $cmpn = $this->cmp()->query("SELECT company_name, company_email, company_phone FROM companies");
+            while($row = $cmpn->fetch(PDO::FETCH_ASSOC)) {
                         if ($row['company_name'] == $cname) {
-                              $this->errors['company_name'] = "Name is already taken"; 
-                              $this->errors['name'] = $cname;
+                              $this->cmpne['company_name'] = "Name is already taken"; 
+                              $this->cmpnv['name'] = $cname;
                         }
                         else if ($row['company_email'] == $cemail) {
-                              $this->errors['company_email'] = "Email is already taken";
-                              $this->errors['email'] = $cemail;
+                              $this->cmpne['company_email'] = "Email is already taken";
+                              $this->cmpnv['email'] = $cemail;
                         }
                         else if ($row['company_phone'] == $pnumber) {
-                              $this->errors['company_phone'] = "Phone number is already taken";
-                              $this->errors['phone'] = $pnumber;
+                              $this->cmpne['company_phone'] = "Phone number is already taken";
+                              $this->cmpnv['phone'] = $pnumber;
                         } 
             }
-            if(count($this->errors) != 0) return $this->errors;
-            else  $this->register($cname, $cpass, $cemail, $pnumber);
+
+            $usre = [];
+            $usrv = [];
+            $usr = $this->usr()->query("SELECT company_name, company_email, company_phone FROM users");
+            while($row = $usr->fetch(PDO::FETCH_ASSOC)) {
+                  if ($row['user_email'] == $cemail) {
+                        $this->usre['company_email'] = "Email is already taken";
+                        $this->usrv['email'] = $cemail;
+                  }
+                  else if ($row['user_phone'] == $pnumber) {
+                        $this->usre['company_phone'] = "Phone number is already taken";
+                        $this->usrv['phone'] = $pnumber;
+                  } 
+            }
+            $this->errors = array_push($this->errors, [[$cmpne, $cmpnv], [$usre, $usrv]]);
+            if(count($this->errors[0]) != 0 && count($this->errors[1]) != 0) return $this->errors;
+            else $this->register($cname, $cpass, $cemail, $pnumber);
       }
 }
  // ONLINESJOBSFINDERUSERS
@@ -132,14 +160,17 @@ class Insert extends DB {
       *           IN users TABLE
       */
 
-      public function insert($fname, $lname, $email, $num) {
-            $ins = $this->usr()->prepare('INSERT INTO users (user_fname, user_lname, user_email, user_phone, unique_id, verify) VALUES
-                                 (:uf, :ul, :ue, :up, ui, :v)');
+      public function insert($fname, $lname, $pass, $email, $num) {
+            $ins = $this->usr()->prepare('INSERT INTO users (user_fname, user_lname, usr_pass, user_email, user_phone, unique_id, verify) VALUES
+                                 (:uf, :ul, :upa, :ue, :up, :ui, :v)');
             $ins->bindValue(":uf", $fname);
             $ins->bindValue(":ul", $lname);
+            $ins->bindValue(":upa", $pass);
             $ins->bindValue(":ue", $email);
             $ins->bindValue(":up", $num);
             $ins->bindValue(":ui", id(8));
             $ins->bindValue(":v", 0);
+            $ins->execute();
+            return $_SESSION['usr_name'] = "$fname $lname";
       }
 }

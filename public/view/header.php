@@ -11,14 +11,19 @@
                               <li class="nav-li" id="profile-drop"><i class="fa fa-user-o" id="profile" aria-hidden="true"></i>
                               <div id="dropdown" style="display:none">
                               <center>
+                              <?php if(isset($_SESSION['cmpn_name'])) { ?>
                                     <div class="company_name"><?= $_SESSION['cmpn_name']?></div>
                                     <div class="signout"><a href="<?= $_SERVER['PHP_SELF'].'?si=sig'?>">Sign Out</a></div>
-                                    <?php if(isset($_GET['si']) && $_GET['si'] == 'sig') {
-                                                session_start();
-                                                session_destroy();      
-                                          }
-                                    ?>
                                     <div class="myvacancy"><a href="./index.php?m=mv">My Vacancies</a></div>
+                              <?php } else if (isset($_SESSION['usr_name'])) {?>
+                                    <div class="company_name"><?= $_SESSION['usr_name']?></div>
+                                    <div class="signout" style='border-radius: 0px 0px 5px 5px'><a href="<?= $_SERVER['PHP_SELF'].'?si=sig'?>">Sign Out</a></div>
+                              <?php }?>
+
+                              <?php if(isset($_GET['si']) && $_GET['si'] == 'sig') {
+                                    session_destroy();
+                                    header('Location: ./index.php');
+                                    } ?>
                               </center>
                               </div>
                               

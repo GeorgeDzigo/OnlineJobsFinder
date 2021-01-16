@@ -26,7 +26,7 @@
       <?php
             /* DEFAULT */
             if(!isset($_SESSION['cmpn_name']) && !isset($_SESSION['cmpn_name']) && $_GET['s'] == 'publish') {
-                  echo "<script>window.location.replace('./rpsrv.php?s=csignup')</script>";    
+                  echo "<script>window.location.replace('./rpsrv.php?s=signin')</script>";    
             }
             /*DEFAULT*/
                   /* COMPANY */ 
@@ -54,7 +54,7 @@
                   /* END COMPANY */ 
 
                   /* USER */
-                        else if(isset($_SERVER['usr_name'])) {
+                        else if(isset($_SESSION['usr_name'])) {
                               /* RESET */
                                     if (isset($_GET['u'])) {
                                           $lnk = $_GET['u'];
@@ -80,13 +80,13 @@
 
                         /* USER REGISTER */
                               else if ($_GET['s'] == "usignup") {
-                                    include_once './authentication/usr/usr.php';
+                                    include_once './authentication/usr/signup.php';
                               }
                         /* END USER REGISTER */
                         
                         /* SIGN IN */
                               else if($_GET['s'] == 'signin') {
-                                    include_once './authentication/cmpn/signin.php';
+                                    include_once './authentication/signin.php';
                               }
                         /* END SIGN IN */ 
                         

@@ -3,15 +3,10 @@
       // Including Classes
       require_once "../../classes/functions.class.php";
       require_once '../../classes/inserter.class.php';
-      require_once '../../classes/getter.class.php';
-      require_once '../../classes/verify.class.php';
+
       // Classes Def Clld Funcs 
-            // getter.class.php
-                  $get = new Getter();
             // inserter.class.php
                   $ins = new Inserting();   
-            // verify.class.php
-                  $ver = new Verify();
             // functions.class.php    
                   $fun = new Functions();
                   $fun->delete_password_reset_links();
