@@ -7,9 +7,12 @@
       <title>Document</title>
       <!-- STYLES -->
       <link rel="stylesheet" href="../css/index.css">
+
       <link rel="stylesheet" href="../css/reset.css">
       
       <link rel="stylesheet" href="../css/add.css">
+
+      <link rel="stylesheet" href="../css/verify.css">
 
       <link rel="stylesheet" href="../fa/css/font-awesome.min.css">
 
@@ -34,16 +37,22 @@
                               
                               /* PUBLISH */
                                     if($_GET['s'] == "publish") {
-                                          include_once './publish/publish.php';     
+                                          include './publish/publish.php';     
                                     }
                               /* END PUBLISH */
 
                               /* RESET */
                                     else if(isset($_GET['c'])) {
                                           $lnk = $_GET['c'];
-                                          include_once "./authentication/reset.php?c=$lnk";  
+                                          include "./authentication/reset.php?c=$lnk";  
                                     }
                               /* END RESET */
+
+                              /* VERIFY */ 
+                                    else if(isset($_GET['v'])) {
+                                          include "./authentication/verify.php";
+                                    }
+                              /* END VERIFY */                       
                               
                               /* 404 ERROR PAGE*/ 
                                     else {
@@ -58,10 +67,16 @@
                               /* RESET */
                                     if (isset($_GET['u'])) {
                                           $lnk = $_GET['u'];
-                                          include_once "./authentication/reset.php?u=$lnk";
+                                          include "./authentication/reset.php?u=$lnk";
                                     }
                               /* END RESET */
-
+                              
+                              /* VERIFY */ 
+                                    else if(isset($_GET['v'])) {
+                                          include "./authentication/verify.php";
+                                    }
+                              /* END VERIFY */ 
+                              
                               /* 404 ERROR PAGE*/ 
                                     else {
                                           echo "PAGE WASN'T FOUND. 404"; 
@@ -74,25 +89,25 @@
                         
                         /* COMPANY REGISTER */
                               if ($_GET['s'] == "csignup") {
-                                    include_once './authentication/cmpn/register.php';
+                                    include './authentication/cmpn/register.php';
                               }
                         /* END COMPANY REGISTER */
 
                         /* USER REGISTER */
                               else if ($_GET['s'] == "usignup") {
-                                    include_once './authentication/usr/signup.php';
+                                    include './authentication/usr/signup.php';
                               }
                         /* END USER REGISTER */
                         
                         /* SIGN IN */
                               else if($_GET['s'] == 'signin') {
-                                    include_once './authentication/signin.php';
+                                    include './authentication/signin.php';
                               }
                         /* END SIGN IN */ 
                         
                         /* RESET PASSWORD */
                               else if($_GET['s'] == 'resetpassword') {
-                                    include_once './authentication/reset.php';
+                                    include './authentication/reset.php';
                               }
                         /* END RESET PASSWORD*/ 
                         

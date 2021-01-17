@@ -1,12 +1,12 @@
 <?php 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
       require_once '../../classes/inserter.class.php';
-      $f = new Inserting();
+      $ins = new Inserting();
       require_once '../../classes/verify.class.php';
       $ver = new Verify();
       $f = $ins->checkAnRegister('cmpn', $_POST['companyname'], $_POST['password'], $_POST['companyemail'], $_POST['phonenumber']);
-      $ver->sendVerifyLink($_POST['companyname'], $_POST['companyemail']);
       if($f == null) {
+            $ver->sendVerifyLink('cmpn', $_POST['companyname'], $_POST['companyemail']);
 ?>
 
       <center style="margin-top: 7%;">    

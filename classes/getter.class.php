@@ -2,21 +2,6 @@
 require_once 'cn.php';
 class Getter extends DB {
       /*
-      *     FUNCTION NAME: show()
-      *      DESC: THIS FUNCTION SELECTS DATA
-      *            AND RETURNS IT AS AN ARRAY
-      *            FROM vacancies TABLE
-      */ 
-
-      protected $datas = [];
-      public function show() {
-            $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, publish_date, logo_lnk FROM vacancies");
-            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
-            return $this->datas;
-      }
-
-
-      /*
       *     FUNCTION NAME: get_unique_id()
       *      DESC: THIS FUNCTION RETURNS Unique_id
       *            OF THE GIVEN NAME BY PARAMETER
@@ -46,20 +31,39 @@ class Getter extends DB {
             };
             return $this->myvacas;
       }
+
       
       /*
-      *     FUNCTION NAME: vacashow()
-      *     DESC: THIS FUNCTION SHOWS VACANCIES
-      *           ON page.php
+      *     FUNCTION NAME: show()
+      *      DESC: THIS FUNCTION SELECTS DATA
+      *            AND RETURNS IT AS AN ARRAY
+      *            FROM vacancies TABLE
       */ 
-      protected $vdata = [];
 
-      public function vacashow($id) {
-            $sql = $this->cmp()->query("SELECT company_name, vacancy_name, info, logo_lnk FROM vacancies where id = " . $id);
-            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
-            return $this->vdata;
+      protected $datas = [];
+      public function show() {
+            $sql = $this->cmp()->query("SELECT id, company_name, vacancy_name, publish_date, logo_lnk FROM vacancies");
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->datas[] = $row;
+            return $this->datas;
       }
 
+
+      /*
+      *     FUNCTION NAME: signin()
+      *     DESC: THIS FUNCTION CHECKS
+      *           USERS INPUT VALUES AND
+      *           SEARCHES FOR THE MATCHES IN
+      *           companies TABLE AND SETS SESSION
+      */ 
+      public function signin($cname, $cpass) {
+            $pass = $this->cmp()->query("SELECT company_name, company_password FROM companies");
+            while($row = $pass->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_name'] == $cname && $row['company_password'] == $cpass) {
+                        return $_SESSION['cmpn_name'] = $row['company_name'];
+                  }
+            }
+      }
+      
 
       /*
       *     FUNCTION NAME: vacaByKeywords()
@@ -107,18 +111,16 @@ class Getter extends DB {
 
 
       /*
-      *     FUNCTION NAME: signin()
-      *     DESC: THIS FUNCTION CHECKS
-      *           USERS INPUT VALUES AND
-      *           SEARCHES FOR THE MATCHES IN
-      *           companies TABLE AND SETS SESSION
+      *     FUNCTION NAME: vacashow()
+      *     DESC: THIS FUNCTION SHOWS VACANCIES
+      *           ON page.php
       */ 
-      public function signin($cname, $cpass) {
-            $pass = $this->cmp()->query("SELECT company_name, company_password FROM companies");
-            while($row = $pass->fetch(PDO::FETCH_ASSOC)) {
-                  if($row['company_name'] == $cname && $row['company_password'] == $cpass) {
-                        return $_SESSION['cmpn_name'] = $row['company_name'];
-                  }
-            }
+      protected $vdata = [];
+
+      public function vacashow($id) {
+            $sql = $this->cmp()->query("SELECT company_name, vacancy_name, info, logo_lnk FROM vacancies where id = " . $id);
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) $this->vdata[] = $row;
+            return $this->vdata;
       }
+
 }

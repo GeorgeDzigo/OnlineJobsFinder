@@ -17,22 +17,36 @@ class Verify extends DB {
       *     FUNCTION NAME: saveVerifyLink()
       *     DESC: THIS FUNCTION SAVES VERIFY LINK IN verify DB
       */ 
-      protected function saveVerifyLink($cname,$cemail) {
-            $link = $this->linkcreator();
-            $sql = $this->cmp()->prepare("INSERT INTO verify (company_name, company_email, verify_link) VALUES (:cn, :cm, :vl)");
-            $sql->bindValue(":cn", $cname);
-            $sql->bindValue(':cm', $cemail);
-            $sql->bindValue(":vl", $link);
-            $sql->execute();
-            return $link;
+
+      protected function saveVerifyLink($to, $cname,$cemail) {
+            if ($to == "usr") {
+                  $link = $this->linkcreator();
+                  $sql = $this->usr()->prepare("INSERT INTO verify (user_name, user_email, verify_link) VALUES (:un, :um, :vl)");
+                  $sql->bindValue(":un", $cname);
+                  $sql->bindValue(':um', $cemail);
+                  $sql->bindValue(":vl", $link);
+                  $sql->execute();
+                  return $link;
+            }
+            if ($to == "cmpn") {
+                  $link = $this->linkcreator();
+                  $sql = $this->cmp()->prepare("INSERT INTO verify (company_name, company_email, verify_link) VALUES (:cn, :cm, :vl)");
+                  $sql->bindValue(":cn", $cname);
+                  $sql->bindValue(':cm', $cemail);
+                  $sql->bindValue(":vl", $link);
+                  $sql->execute();
+                  return $link; 
+            }
+
       }
+
 
       /*
       *     FUNCTION NAME: sendVerifyLink()
       *     DESC: THIS FUNCTION SENDS VERIFICAION LINK
       *           TO CLIENTS EMAIL WHEN THEY GET REGISTERED
       */          
-      public function sendVerifyLink($cname,$cemail) {
+      public function sendVerifyLink($to, $cname,$cemail) {
       // subject
       $subject = 'Account Verification';
 
@@ -43,7 +57,7 @@ class Verify extends DB {
       </head>
       <body>
       <h3>Click the link below to verify your account '.ucfirst($cname).'</h3>
-      <a href=http://localhost/OnlineJobsFinder/public/routes/verify.php?v='.$this->saveVerifyLink($cname, $cemail).'>Click Me To Verify Your Account</a>
+      <a href=http://localhost/OnlineJobsFinder/public/routes/rpsrv.php?v='.$this->saveVerifyLink($to, $cname, $cemail).'&cc='.$to.'>Click Me To Verify Your Account</a>
       </body>
       </html>
       ';
@@ -64,15 +78,28 @@ class Verify extends DB {
       *           THE ACCOUNT, WHEN THE CMPN CLICKS 
       *           ON THE LINK THAT WAS SENT TO ITS EMAIL 
       */ 
-      public function verify($l) {
-            $ver = $this->cmp()->query("SELECT * FROM verify");
-            while($row = $ver->fetch(PDO::FETCH_ASSOC)) {
-                  if($row['verify_link'] == $l) {
-                        $name = $row['company_name'];
-                        $email = $row['company_email'];
+      public function verify($to, $l) {
+            if ($to == 'usr') {
+                  $ver = $this->usr()->query("SELECT * FROM verify");
+                  while($row = $ver->fetch(PDO::FETCH_ASSOC)) {
+                        if($row['verify_link'] == $l) {
+                              $name = $row['user_name'];
+                              $email = $row['user_email'];
+                        }
                   }
+                  $this->usr()->query("UPDATE users SET verify = 1 WHERE user_email = '$email'");
+                  $this->usr()->query("DELETE FROM verify WHERE user_name = '$name'");
             }
-            $this->cmp()->query("UPDATE companies SET verified = 1 WHERE company_name = '$name'");
-            $this->cmp()->query("DELETE FROM verify WHERE company_name = '$name'");
+            else if ($to == "cmpn") {
+                  $ver = $this->cmp()->query("SELECT * FROM verify");
+                  while($row = $ver->fetch(PDO::FETCH_ASSOC)) {
+                        if($row['verify_link'] == $l) {
+                              $name = $row['company_name'];
+                              $email = $row['company_email'];
+                        }
+                  }
+                  $this->cmp()->query("UPDATE companies SET verified = 1 WHERE company_name = '$name'");
+                  $this->cmp()->query("DELETE FROM verify WHERE company_name = '$name'");
+            }
       }
 }

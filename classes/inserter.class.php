@@ -183,19 +183,17 @@ class Inserting extends DB {
                   else {
                         $fl= explode(" ", $cname);
                         $this->insertu($fl[0], $fl[1], $cpass, $cemail, $pnumber);
+                        return null;
                   }
                    
-            }
-            else if ($to == 'cmpn') {
-                  if($this->usrcheck($cemail, $pnumber) != null) {
-                        if($this->cmpncheck($cname, $cpass, $cemail, $pnumber) != null) $this->cmpncheck($cname, $cpass, $cemail, $pnumber);
-                  }
-                  else $this->register($cname, $cpass, $cemail, $pnumber);
             }
             else if ($to == "cmpn") {
                   $res = $this->checkfornull($this->usrcheck($cemail, $pnumber), $this->cmpncheck($cname, $cemail, $pnumber));
                   if ($res != null) return $res;
-                  else $this->register($cname, $cpass, $cemail, $pnumber);
+                  else {
+                        $this->register($cname, $cpass, $cemail, $pnumber);
+                        return null;
+                  }
             }
       }
 

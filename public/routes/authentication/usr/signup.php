@@ -1,10 +1,26 @@
-<?php include '../../view/header.php'?>
 <?php if(count($_SESSION) == 0 ) { 
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
             require_once '../../classes/inserter.class.php';
+            require_once '../../classes/verify.class.php';
             $ins = new Inserting();
+            $ver = new Verify();
             $dt = $ins->checkAnRegister('usr', $_POST['usrfname'] . " " . $_POST['usrlname'], $_POST['usrpassword'], $_POST['usremail'], $_POST['usrphonenumber']);
-            header("location: ./index.php");
+            if($dt == null) {
+                  $ver->sendVerifyLink('usr', $_POST['usrfname'] . " " . $_POST['usrlname'], $_POST['usremail']);
+                  
+            
+?>  
+<center style="margin-top: 7%;">    
+            <pre class="success">
+You Registered successfully! 
+Please check your email to verify your account
+You will redirected to main page in 10 seconds
+            </pre>
+</center>
+      
+<?php  
+            echo "<script>setTimeout(function(){ window.location.replace('./index.php') }, 10000);</script>";
+            }
       }
 ?>
 <div class="formholder">
