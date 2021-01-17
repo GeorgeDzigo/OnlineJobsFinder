@@ -17,7 +17,7 @@ class DB {
       protected $usrpassword = "gabogio210";
 
       protected function usr() {
-            $pdo = New PDO("mysql:host=localhost;dbname=".$this->usrdbname, $this->usrusername, $this->usrpassword);
+            $pdo = New PDO("mysql:host=localhost;dbname=onlinejobsfinderusers", 'root', 'gabogio210');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
       }

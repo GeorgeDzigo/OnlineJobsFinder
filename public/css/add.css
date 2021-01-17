@@ -25,6 +25,11 @@
                         display: block;
                         margin-bottom: 20px;
                   }
+                  .errors {
+                        position: absolute;
+                        margin-top: -2.5%;
+                        margin-left: 7%;
+                  }
                   .info{
                         resize: none;
                         width: 30%;
@@ -113,9 +118,7 @@
 
 /* END REGISTER */
 
-/* SIGN OUT BUTTON */
 
-/* END SIGN OUT BUTTON */
 
 
 /* NPTRRS */

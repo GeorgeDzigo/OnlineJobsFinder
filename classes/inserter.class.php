@@ -7,8 +7,34 @@ function id($n) {
       $str = array_slice($str, 0, $n);
       return join("", $str);
 }
-// ONLINESJOBSFINDERCOMPANIES
 class Inserting extends DB {
+// ONLINESJOBSFINDERCOMPANIES
+      /*
+      *     FUNCTION NAME: cmpncheck()
+      *     DESC: THIS FUNCTION CHECKS IF GIVEN
+      *           PARAMETERS VALUES ALREADY EXIST
+      *           IN CMPN TABLE
+      */ 
+
+      private function cmpncheck($name = '', $mail, $pnumber) {
+            $errors = [];
+            $cmpn = $this->cmp()->query("SELECT company_name, company_email, company_phone FROM companies");
+            while($row = $cmpn->fetch(PDO::FETCH_ASSOC)) {
+                  if ($row['company_name'] == $name && $name != '') {
+                        $errors['name'] = "Name is already taken";
+                  } 
+                  else if ($row['company_email'] == $mail) {
+                        $errors['email'] = 'Email is already taken';
+                  }
+                  else if ($row['company_phone'] == $pnumber) {
+                        $errors['phone'] = "Phone number is already taken";
+                  }
+            }
+            if(count($errors) == 0) return null;
+            else return $errors;
+      }      
+
+      
       /*
       *     FUNCTION NAME: img_upload()
       *     DESC: THIS FUNCTION TAKES IMG FILE, 
@@ -90,77 +116,18 @@ class Inserting extends DB {
             return $_SESSION['cmpn_name'] = $cname;
       }
 
-
-
-
-      /*
-      *     FUNCTION NAME: cmpncheck()
-      *     DESC: THIS FUNCTION CHECKS IF GIVEN
-      *           PARAMETERS VALUES ALREADY EXIST
-      *           IN CMPN TABLE
-      */ 
-
-      private function cmpncheck($name, $cpass, $cemail, $pnumber) {
-            $errors = [];
-      }
-
+      
+      // ONLINESJOBSFINDERUSERS
 
       /*
-      *     FUNCTION NAME: checkAnRegister()
-      *     DESC: THIS FUNCTION TAKES SUBMMITED FORM
-      *           FROM THE USER AND CHECKS IF THE SAME
-      *           INFORMATION EXISTS IN THE TABLE, IF NOT
-      *           USER WILL BE REGISTERED (IN companies DB)
-      *           
-      */
-
-
-      public function checkAnRegister($cname,$cpass, $cemail,$pnumber) {
-            $cmpn = $this->cmp()->query("SELECT company_name, company_email, company_phone FROM companies");
-            while($row = $cmpn->fetch(PDO::FETCH_ASSOC)) {
-                        if ($row['company_name'] == $cname) {
-                              $this->cmpne['company_name'] = "Name is already taken"; 
-                              $this->cmpnv['name'] = $cname;
-                        }
-                        else if ($row['company_email'] == $cemail) {
-                              $this->cmpne['company_email'] = "Email is already taken";
-                              $this->cmpnv['email'] = $cemail;
-                        }
-                        else if ($row['company_phone'] == $pnumber) {
-                              $this->cmpne['company_phone'] = "Phone number is already taken";
-                              $this->cmpnv['phone'] = $pnumber;
-                        } 
-            }
-
-            $usre = [];
-            $usrv = [];
-            $usr = $this->usr()->query("SELECT company_name, company_email, company_phone FROM users");
-            while($row = $usr->fetch(PDO::FETCH_ASSOC)) {
-                  if ($row['user_email'] == $cemail) {
-                        $this->usre['company_email'] = "Email is already taken";
-                        $this->usrv['email'] = $cemail;
-                  }
-                  else if ($row['user_phone'] == $pnumber) {
-                        $this->usre['company_phone'] = "Phone number is already taken";
-                        $this->usrv['phone'] = $pnumber;
-                  } 
-            }
-            $this->errors = array_push($this->errors, [[$cmpne, $cmpnv], [$usre, $usrv]]);
-            if(count($this->errors[0]) != 0 && count($this->errors[1]) != 0) return $this->errors;
-            else $this->register($cname, $cpass, $cemail, $pnumber);
-      }
-}
- // ONLINESJOBSFINDERUSERS
-class Insert extends DB {
-      /*
-      *     FUNCTION NAME: insert()
+      *     FUNCTION NAME: insertu()
       *     DESC: THIS FUNCTION GETS VALUES
       *           FROM $_POST SUPERGLOBAL 
       *           VARIABLE AND INSERTS THEM
       *           IN users TABLE
       */
 
-      public function insert($fname, $lname, $pass, $email, $num) {
+      private function insertu($fname, $lname, $pass, $email, $num) {
             $ins = $this->usr()->prepare('INSERT INTO users (user_fname, user_lname, usr_pass, user_email, user_phone, unique_id, verify) VALUES
                                  (:uf, :ul, :upa, :ue, :up, :ui, :v)');
             $ins->bindValue(":uf", $fname);
@@ -172,5 +139,78 @@ class Insert extends DB {
             $ins->bindValue(":v", 0);
             $ins->execute();
             return $_SESSION['usr_name'] = "$fname $lname";
+      }
+
+
+      /*
+      *     FUNCTION NAME: usrcheck()
+      *     DESC: THIS FUNCTION CHECKS IF GIVEN PARAMETERS
+      *           ALREADY EXIST IN users TABLE, IF
+      *           EXISTS IT WILL RETURN ARRAY WITH 
+      *           ERRORS!
+      */
+
+      private function usrcheck($email, $pnumber) {
+            $errors = [];
+            $usr = $this->usr()->query('SELECT user_email, user_phone FROM users');
+            while($row = $usr->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['user_email'] == $email) {
+                        $errors['email'] = "Email is already Taken";
+                  }
+                  if ($row['user_phone'] == $pnumber) {
+                        $errors['phone'] = "Phone number is Already Taken";
+                  }
+            }
+            if(count($errors) != 0) return $errors;
+            else return null;
+      }
+
+      // GENERAL CODES
+
+      /*
+      *     FUNCTION NAME: checkAnRegister()
+      *     DESC: THIS FUNCTION TAKES SUBMITTED FORM
+      *           FROM THE USER AND CHECKS IF THE SAME
+      *           INFORMATION EXISTS IN THE TABLE, IF NOT
+      *           USER WILL BE REGISTERED (IN companies DB)
+      *           
+      */
+
+      public function checkAnRegister($to, $cname, $cpass, $cemail,$pnumber) {
+            if($to == "usr") {
+                  $res = $this->checkfornull($this->usrcheck($cemail, $pnumber), $this->cmpncheck('', $cemail, $pnumber));
+                  if ($res != null) return $res;
+                  else {
+                        $fl= explode(" ", $cname);
+                        $this->insertu($fl[0], $fl[1], $cpass, $cemail, $pnumber);
+                  }
+                   
+            }
+            else if ($to == 'cmpn') {
+                  if($this->usrcheck($cemail, $pnumber) != null) {
+                        if($this->cmpncheck($cname, $cpass, $cemail, $pnumber) != null) $this->cmpncheck($cname, $cpass, $cemail, $pnumber);
+                  }
+                  else $this->register($cname, $cpass, $cemail, $pnumber);
+            }
+            else if ($to == "cmpn") {
+                  $res = $this->checkfornull($this->usrcheck($cemail, $pnumber), $this->cmpncheck($cname, $cemail, $pnumber));
+                  if ($res != null) return $res;
+                  else $this->register($cname, $cpass, $cemail, $pnumber);
+            }
+      }
+
+
+      /*
+      *     FUNCTION NAME: checkfornull()
+      *     DESC: THIS FUNCTION TAKES TWO FUNCTIONS
+      *           AS PARAMETERS AND CHECKS IF THEIR
+      *           RESULT IS NOT NULL/ERRORS ARRAY
+      */ 
+      
+      private function checkfornull($a, $b) {
+            if($a != null && $b == null) return $a;
+            else if ($b != null && $a == null) return $b;
+            else if ($b != null && $a != null) return $a;
+            else return null;
       }
 }
