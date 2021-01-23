@@ -115,8 +115,7 @@
                               else {
                                     echo "PAGE WASN'T FOUND. 404"; 
                               } 
-                        /* END 404 ERROR PAGE*/ 
-
+                        /* END 404 ERROR PAGE*/
                   }
       ?>
 

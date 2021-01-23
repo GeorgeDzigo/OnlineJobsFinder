@@ -3,8 +3,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       require_once '../../classes/getter.class.php';
       $get = new Getter();
       $d = "";
-      if($get->signin($_POST['companyname'], $_POST['password']) == $_POST['companyname']) {
-            $get->signin($_POST['companyname'], $_POST['password']);
+      if($get->signin($_POST['usrcmpnemail'], $_POST['password'])) {
+            $get->signin($_POST['usrcmpnemail'], $_POST['password']);
             echo $d . "<script>window.location.replace('./index.php')</script>";
       }
       else {

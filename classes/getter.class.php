@@ -49,19 +49,53 @@ class Getter extends DB {
 
 
       /*
+      *     FUNCTION NAME: usrChechForSignIn()
+      *     DESC: THIS FUNCTION TAKES TWO PARAMETERS
+      *           AND CHECKS IF THE PARAMETERS MATCH
+      *           IN USERS TABLE, IF YES IT WILL RETURN
+      *           THE USER NAME
+      */
+      private function usrCheckForSignIn($email, $pass) {
+            $sql = $this->usr()->query("SELECT user_fname, user_lname, usr_pass, user_email FROM users");
+            $usr_name = false;
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['user_email'] == $email && $row['usr_pass'] == $pass)  $usr_name = "$row[user_fname] $row[users_lname]";
+            }
+            if($usr_name != false) return $_SESSION['usr_name'] = $usr_name;
+            else return $usr_name;
+      }
+
+      /*
+      *     FUNCTION NAME: cmpnChechForSignIn()
+      *     DESC: THIS FUNCTION TAKES TWO PARAMETERS
+      *           AND CHECKS IF THE PARAMETERS MATCH
+      *           IN COMPANIES TABLE, IF YES IT WILL RETURN
+      *           THE COMPANY NAME
+      */ 
+
+      private function cmpnCheckForSignIn($email, $pass) {
+            $sql = $this->cmp()->query("SELECT company_name, company_password, company_email FROM companies");
+            $cmpn_name = false;
+            while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                  if($row['company_email'] == $email && $row['company_password'] ==  $pass) $cmpn_name = $row['company_name'];
+            }
+            if($cmpn_name != false) return $_SESSION['cmpn_name'] = $cmpn_name;
+            else return $cmpn_name;
+      }
+
+
+      /*
       *     FUNCTION NAME: signin()
       *     DESC: THIS FUNCTION CHECKS
       *           USERS INPUT VALUES AND
       *           SEARCHES FOR THE MATCHES IN
       *           companies TABLE AND SETS SESSION
       */ 
-      public function signin($cname, $cpass) {
-            $pass = $this->cmp()->query("SELECT company_name, company_password FROM companies");
-            while($row = $pass->fetch(PDO::FETCH_ASSOC)) {
-                  if($row['company_name'] == $cname && $row['company_password'] == $cpass) {
-                        return $_SESSION['cmpn_name'] = $row['company_name'];
-                  }
-            }
+      public function signin($email, $pass) {
+            $usr = $this->usrCheckForSignIn($email, $pass);
+            $cmpn = $this->cmpnCheckForSignIn($email, $pass);
+            if($usr != false) return $usr;
+            else return $cmpn;
       }
       
 
