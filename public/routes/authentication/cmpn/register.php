@@ -27,14 +27,17 @@ You will redirected to main page in 10 seconds
                   </div>
                   <center id="cmpn">
                         <form action="<?php $_SERVER['PHP_SELF'] . "?s=signup"?>" method="POST" class="add" autocomplete="off">
-                              <input type="text" name="companyname" id="re" placeholder="Company Name" <?= "value=".$_POST['companyname']?>>  <span class='errors'><?= $f['name']?></span>
-                              <input type="email" name="companyemail" id="re" placeholder="Company Email" <?= "value=".$_POST['companyemail']?>>  <span class='errors'><?= $f['email']?></span>
-                              <input type="password" name="password" id="re" placeholder="Password">
-                              <input type="tel" name="phonenumber" id="re" placeholder="Company Number" <?= "value=".$_POST['phonenumber']?>>  <span class='errors'><?= $f['phone']?></span>
-                              <button type="submit" class='submit' id="resubmit" onclick='register()'>Submit</button>
+                              <input type="text" name="companyname" id="csiup" placeholder="Company Name" <?= "value=".$_POST['companyname']?>>  <span class='errors'><?= $f['name']?></span>
+                              <input type="email" name="companyemail" id="csiup" placeholder="Company Email" <?= "value=".$_POST['companyemail']?>>  <span class='errors'><?= $f['email']?></span>
+                              <input type="password" name="password" id="csiup" placeholder="Password">
+                              <input type="tel" name="phonenumber" id="csiup" placeholder="Company Number" <?= "value=".$_POST['phonenumber']?>>  <span class='errors'><?= $f['phone']?></span>
+                              <button type="button" class='submit' id="resubmit">Submit</button>
                               <a href="./rpsrv.php?s=usignup" class="chngrsrcm" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">User Registration</a>
                         </form>
                         <a href="./rpsrv.php?s=signin" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Have An Account? Sign In Then</a>
                   </center>
+                  <p id="reerrors"></p>
             </div>
             <!-- COMPANY SIGN UP -->
+<!-- script -->
+<script src="../js/signup/csignup.js"></script>

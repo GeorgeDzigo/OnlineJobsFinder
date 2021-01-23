@@ -20,9 +20,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <center>
                   <form action="<?php $_SERVER['PHP_SELF'] . "?s=signin"?>" method="POST" class="add" autocomplete="off">
-                        <input type="email" name="usrcmpnemail" id="si" placeholder="email" value=''>
-                        <input type="password" name="password" id="si" placeholder="Password" value=''>
-                        <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
+                        <input type="email" name="usrcmpnemail" id="siin" placeholder="email" value=''>
+                        <input type="password" name="password" id="siin" placeholder="Password" value=''>
+                        <button type="submit" class='submit' id="resubmit">Submit</button>
                   </form>
                         
                   <a href="./rpsrv.php?s=csignup" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Don't have an account yet? Create one!</a><span style='font-size: 30px;'>|</span>

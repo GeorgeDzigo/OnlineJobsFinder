@@ -22,6 +22,7 @@
 
                               <?php if(isset($_GET['si']) && $_GET['si'] == 'sig') {
                                     session_destroy();
+                                    header("location: ./index.php");
                                     } ?>
                               </center>
                               </div>

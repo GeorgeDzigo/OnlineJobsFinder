@@ -29,7 +29,7 @@ You need to verify your account to publish vacancy
                   $ins->insert($_POST['firstname'], $_POST['lastname'], $_POST['vacancyname'], $_POST['category'], $_POST['keywords'], $_POST['info'], $_FILES['file'],$_SESSION['cmpn_name']);
                   echo '<script>window.location.replace("./index.php")</script>';
             }
-      ?><!-- PUBLISH  -->
+      ?>
             <div class="formholder">
             
                   <div class="headersholder">
@@ -62,7 +62,7 @@ You need to verify your account to publish vacancy
                                     <span id="file-chosen">No file chosen</span>
                               </div>
                               <textarea name="info" id="in" class='info' placeholder="Requirements"></textarea>
-                              <button type="button" class='submit' id="submit" onclick='inputChecker()'>Submit</button>
+                              <button type="button" class='submit' id="submit">Submit</button>
                               
                         </form>
                         
@@ -78,6 +78,6 @@ You need to verify your account to publish vacancy
                   fileChosen.textContent = this.files[0].name
                   })
             </script>
-            <!-- END PUBLISH -->
       <?php } ?>
 <!-- Scripts -->
+<script src='../js/publish.js'></script>

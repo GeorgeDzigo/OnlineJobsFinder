@@ -13,7 +13,7 @@
                   <center>
                         <form action="<?php $_SERVER['PHP_SELF'] . "s=resetpassword"?>" method="POST" class="add" autocomplete="off">
                         <input type="email" name="companyemail" id="re" placeholder="Company Email" >
-                        <button type="button" class='submit' id="resubmit" onclick="resetpassword()" style='width:16%;'>Reset Password</button>
+                        <button type="submit" class='submit' id="resubmit" style='width:16%;'>Reset Password</button>
                         </form>
                          
                         <a href="./rpsrv.php?s=csignup" style="text-decoration: none; font-weight: bolder; color:black; font-size: 20px;">Don't have an account yet? Create one!</a>

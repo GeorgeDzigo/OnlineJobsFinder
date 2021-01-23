@@ -161,15 +161,17 @@
                   border-radius: 2px;
                   line-height: 1em;
             }
-            #re {
-                  display: block;
-            }
       /* END ERRORS */
 
 /* END REGISTER */
 
 
-
+/* ADDING BLOCKS TO INPUTS */
+            #csiup {display: block !important;}
+            #usiup {display: block !important}
+            #siin  {display: block !important}
+            #re {display: block !important}
+/* ADDING BLOCKS TO INPUTS */
 
 /* NPTRRS */
             .nptrrs{
