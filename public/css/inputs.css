@@ -1,0 +1,181 @@
+/* FORM HOLDER */
+      .submit {
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+      }
+
+      /* HEADERS HOLDER */
+            .headersholder-h1{
+                  text-align: center;
+                  font-weight: bold;
+                  font-size: 2.5em;
+                  font-family: 'Roboto', sans-serif;
+                  padding: 40px;
+            }
+      /* END HEADERS HOLDER */
+      /* INPUTS */
+            .add input {
+                  display: block;
+                  margin-bottom: 20px;
+            }
+            .errors {
+                  position: absolute;
+                  margin-top: -2.5%;
+                  margin-left: 7%;
+            }
+            .info{
+                  resize: none;
+                  width: 30%;
+                  height: 250px;
+                  display: block;
+            }
+      /* END INPUTS */
+
+      /* INPUT STYLE*/
+      input[type=text], select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+      }
+      input[type=password], select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+      }
+      button[type=submit] {
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+      }
+      input[type=email], select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+      }
+      input[type=tel], select {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+      }
+      /* END INPUT STYLE */
+
+
+      /* FILE INPUT */
+            .img-upload {
+                  position: relative;
+                  bottom: 25px;
+            }      
+            /* IMAGE UPLOAD */
+                  .label {
+                        background-color: indigo;
+                        color: white;
+                        padding: 0.5rem;
+                        font-family: sans-serif;
+                        border-radius: 0.3rem;
+                        cursor: pointer;
+                        margin-top: 1rem;
+                  }
+                  
+                  #file-chosen{
+                        position: relative;
+                        margin-left: 0.3rem;
+                        font-family: sans-serif;
+                  }
+            /* END IMAGE UPLOAD */
+      /* END FILE INPUT */
+
+      /* CHANGE TO CMPN-USR REGIST */
+            .chngrsrcm {
+                  text-decoration: underline;
+                  font-weight: bold;
+                  font-size: 18px;
+                  position: absolute;
+                  margin-top: -10px;
+                  }
+      /* END CHANGE TO CMPN-USR REGIST */
+/* END FORM HOLDER */
+
+/* ERRORS */
+      #errors {
+            display: inline-block;
+            position: relative;
+            bottom: 236px;
+            left: 15px;
+      }
+      #errors > li {
+            color: red;
+            list-style: none;
+            font-size: 20px;
+            font-weight: bold;
+      }
+
+/* END ERRORS */
+
+/* REIGSTER */
+      /* ERRORS */
+            #reerrors {
+                  display: inline-block;
+                  position: relative;
+                  bottom: 236px;
+                  left: 15px;
+            }
+            #reerrors > li {
+                  color: red;
+                  list-style: none;
+                  font-size: 20px;
+                  font-weight: bold;
+            }
+            .success {
+                  padding: 50px;
+                  background-color: lightgreen;
+                  width: 38%;
+                  font-size: 117%;
+                  font-family: -webkit-pictograph;
+                  border-radius: 2px;
+                  line-height: 1em;
+            }
+            #re {
+                  display: block;
+            }
+      /* END ERRORS */
+
+/* END REGISTER */
+
+
+
+
+/* NPTRRS */
+            .nptrrs{
+                  color: red;
+                  font-weight: bold;
+                  position: relative;
+                  bottom: 79px;
+            }
+/* END NPTRRS */

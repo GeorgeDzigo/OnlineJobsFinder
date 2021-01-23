@@ -86,10 +86,10 @@ class Getter extends DB {
 
       /*
       *     FUNCTION NAME: signin()
-      *     DESC: THIS FUNCTION CHECKS
-      *           USERS INPUT VALUES AND
-      *           SEARCHES FOR THE MATCHES IN
-      *           companies TABLE AND SETS SESSION
+      *     DESC: THIS FUNCTION CHECKS USERS
+      *           INPUT VALUES AND SEARCHES
+      *           FOR THE MATCHES IN companies
+      *           TABLE AND SETS SESSION
       */ 
       public function signin($email, $pass) {
             $usr = $this->usrCheckForSignIn($email, $pass);

@@ -50,7 +50,7 @@ You need to verify your account to publish vacancy
                                     <option placeholder="Doctor">Doctor</option>
                               </select>
                               <!-- End CATEGORY -->
-                              <input type="text" id="in" placeholder="Keywords" name="keywords">
+                              <input type="text" id="in" placeholder="Keywords" name="keywords" style='display: block;'>
                               <div class="img-upload">
                                     <!-- actual upload which is hidden -->
                                     <input type="file" id="actual-btn" name="file" style="visibility: hidden">

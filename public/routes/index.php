@@ -18,10 +18,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <!-- STYLES -->
+      <link rel="stylesheet" href="../css/inputs.css">
+
       <link rel="stylesheet" href="../css/index.css">
+
       <link rel="stylesheet" href="../css/reset.css">
       
-      <link rel="stylesheet" href="../css/add.css">
+      <link rel="stylesheet" href="../css/header.css">
+
+      <link rel="stylesheet" href="../css/verify.css">
 
       <link rel="stylesheet" href="../fa/css/font-awesome.min.css">
 
@@ -105,7 +110,8 @@
                   </center>
             </section>
       <!-- END WORKS -->
-<!-- scripts -->
-<script src="../js/index.js"></script>
-<!-- end scripts -->
-<?php include '../view/footer.php'?>
+      <!-- scripts -->
+      <script src="../js/index.js"></script>
+      <script src="../js/profiledropdown.js"></script>
+</body>
+</html>

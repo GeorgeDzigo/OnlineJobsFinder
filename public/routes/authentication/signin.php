@@ -20,8 +20,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <center>
                   <form action="<?php $_SERVER['PHP_SELF'] . "?s=signin"?>" method="POST" class="add" autocomplete="off">
-                        <input type="email" name="usrcmpnemail" id="re" placeholder="email" value=''>
-                        <input type="password" name="password" id="re" placeholder="Password" value=''>
+                        <input type="email" name="usrcmpnemail" id="si" placeholder="email" value=''>
+                        <input type="password" name="password" id="si" placeholder="Password" value=''>
                         <button type="button" class='submit' id="resubmit" onclick='register()'>Submit</button>
                   </form>
                         
@@ -31,3 +31,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p id="reerrors"> </p>
       </div>
 <!-- END SIGN IN -->
+<!-- SCRIPTS -->
+<script src='../js/signin.js'></script>

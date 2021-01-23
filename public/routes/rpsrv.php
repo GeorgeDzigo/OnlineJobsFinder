@@ -6,11 +6,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <!-- STYLES -->
+      <link rel="stylesheet" href="../css/inputs.css">
+
       <link rel="stylesheet" href="../css/index.css">
 
       <link rel="stylesheet" href="../css/reset.css">
       
-      <link rel="stylesheet" href="../css/add.css">
+      <link rel="stylesheet" href="../css/header.css">
 
       <link rel="stylesheet" href="../css/verify.css">
 
@@ -119,5 +121,7 @@
                   }
       ?>
 
-<script src="../js/add.js"></script>
-<?php include '../view/footer.php'?>
+      <script src="../js/add.js"></script>
+      <script src="../js/profiledropdown.js"></script>
+</body>
+</html>
