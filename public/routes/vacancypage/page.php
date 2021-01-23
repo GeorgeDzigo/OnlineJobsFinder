@@ -1,7 +1,7 @@
 <?php
       // Including Classes
-            require_once '../../classes/functions.class.php';
-            require_once '../../classes/getter.class.php';
+            require_once '../../../classes/functions.class.php';
+            require_once '../../../classes/getter.class.php';
       // Classes Deg Clld Functions
             // getter.class.php
                   $get = new Getter();
@@ -14,12 +14,12 @@ $get = $get->vacashow($_GET['id']);
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <!-- STYLES -->
-      <link rel="stylesheet" href=".././css/index.css">
-      <link rel="stylesheet" href=".././css/reset.css">
+      <link rel="stylesheet" href="../../css/index.css">
+      <link rel="stylesheet" href="../../css/reset.css">
       
-      <link rel="stylesheet" href=".././css/add.css">
+      <link rel="stylesheet" href="../../css/add.css">
 
-      <link rel="stylesheet" href="css/page.css">
+      <link rel="stylesheet" href="./css/page.css">
 
       <link rel="stylesheet" href="fa/css/font-awesome.min.css">
 
@@ -33,11 +33,11 @@ $get = $get->vacashow($_GET['id']);
 <body>
       <!-- HEADER -->
             <header class="header">
-                  <h1 class='logo'><a href="../routes/index.php">Jobs Finder</h1>
+                  <h1 class='logo'><a href="../index.php">Jobs Finder</h1>
 
                   <nav class="nav">
                         <li class="nav-li"> <a href="../index.php" class="nav-li-a">Vacancies</a></li>
-                        <li class="nav-li"> <a href="../add.php" class="nav-li-a">Publish Vacancies</a></li>
+                        <li class="nav-li"> <a href="../rpsrv.php?s=publish" class="nav-li-a">Publish Vacancies</a></li>
                         <li class="nav-li"> <a href="#" class="nav-li-a">Contact</a></li>
                   
                   </nav>

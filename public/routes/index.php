@@ -62,7 +62,7 @@
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
                                     <h3><img src="<?=$v['logo_lnk']?>" width="50"><?= $v['company_name']?></h3>
@@ -76,7 +76,7 @@
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                                     <h3><?= $v['vacancy_name']?></h3>
                                     <h3><img src="<?=$v['logo_lnk']?>" width="50"><?= $v['company_name']?></h3>
@@ -91,7 +91,7 @@
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];
                         ?>
-                         <a href="../vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
+                         <a href="./vacancypage/page.php?id=<?= $v['id']?>" class="works-a">     
                               <div class='works-vacancies'>
                               
                                     <h3><?= $v['vacancy_name']?></h3>
