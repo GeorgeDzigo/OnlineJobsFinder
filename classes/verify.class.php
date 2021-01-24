@@ -57,7 +57,7 @@ class Verify extends DB {
       </head>
       <body>
       <h3>Click the link below to verify your account '.ucfirst($cname).'</h3>
-      <a href=http://localhost/OnlineJobsFinder/public/routes/rpsrv.php?v='.$this->saveVerifyLink($to, $cname, $cemail).'&cc='.$to.'>Click Me To Verify Your Account</a>
+      <a href=http://localhost/OnlineJobsFinder/public/routes/rpsrv.php?tab=verify&v='.$this->saveVerifyLink($to, $cname, $cemail).'&cc='.$to.'>Click Me To Verify Your Account</a>
       </body>
       </html>
       ';

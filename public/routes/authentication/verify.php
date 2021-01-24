@@ -1,10 +1,6 @@
 <?php
 session_start();
-      // Including Classes
-            require_once "../../classes/verify.class.php";
-      // Classes Def Clld Funcs
-            // functions.class.php
-            $ver = new Verify();
+
 $ver->verify($_GET['cc'], $_GET['v']);
 ?>
             

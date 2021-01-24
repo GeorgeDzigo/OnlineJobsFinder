@@ -4,7 +4,7 @@
                   <nav class="nav">
                         <li class="nav-li"> <a href="./index.php" class="nav-li-a">Vacancies</a></li>
                         <?php if(!isset($_SESSION['usr_name'])) {?>
-                              <li class="nav-li"> <a href="./rpsrv.php?s=publish" class="nav-li-a">Publish Vacancies</a></li>
+                              <li class="nav-li"> <a href="./rpsrv.php?tab=publish" class="nav-li-a">Publish Vacancies</a></li>
                         <?php } ?>
                         <li class="nav-li"> <a href="#" class="nav-li-a">Contact</a></li>
                         <?php if(count($_SESSION) == 1) { ?>
@@ -13,14 +13,14 @@
                               <center>
                               <?php if(isset($_SESSION['cmpn_name'])) { ?>
                                     <div class="company_name"><?= $_SESSION['cmpn_name']?></div>
-                                    <div class="signout"><a href="<?= $_SERVER['PHP_SELF'].'?si=sig'?>">Sign Out</a></div>
-                                    <div class="myvacancy"><a href="./index.php?m=mv">My Vacancies</a></div>
+                                    <div class="signout"><a href="<?= $_SERVER['PHP_SELF'].'?tab=signout'?>">Sign Out</a></div>
+                                    <div class="myvacancy"><a href="./index.php?tab=myvacancy">My Vacancies</a></div>
                               <?php } else if (isset($_SESSION['usr_name'])) {?>
                                     <div class="company_name"><?= $_SESSION['usr_name']?></div>
-                                    <div class="signout" style='border-radius: 0px 0px 5px 5px'><a href="<?= $_SERVER['PHP_SELF'].'?si=sig'?>">Sign Out</a></div>
+                                    <div class="signout" style='border-radius: 0px 0px 5px 5px'><a href="<?= $_SERVER['PHP_SELF'].'?tab=signout'?>">Sign Out</a></div>
                               <?php }?>
 
-                              <?php if(isset($_GET['si']) && $_GET['si'] == 'sig') {
+                              <?php if(isset($_GET['tab']) && $_GET['tab'] == 'signout') {
                                     session_destroy();
                                     header("location: ./index.php");
                                     } ?>

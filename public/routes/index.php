@@ -3,13 +3,17 @@
       // Including Classes
       require_once "../../classes/functions.class.php";
       require_once '../../classes/getter.class.php';
+      require_once '../../classes/resetpassword.class.php';
       // Classes Def Clld Funcs 
         // getter.class.php
             $get = new Getter();   
         // functions.class.php    
             $fun = new Functions();
+       // resetpassword.class.php
+            $res = new Reset();   
+
             $fun->delete();
-            $fun->delete_password_reset_links();
+            $res->delete_password_reset_links();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +66,7 @@
                               <h3>Publish Date</h3>
                         </div>
                         <?php 
-                              if(count($_GET) == 1 && $_GET['m'] == "mv") {
+                              if(count($_GET) == 1 && $_GET['tab'] == "myvacancy") {
                               foreach($get->myvacas() as $v){
                                     $date =  explode("-", $v['publish_date']);
                                     $m = $date[1]; $d = $date[2];

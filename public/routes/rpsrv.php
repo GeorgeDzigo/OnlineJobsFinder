@@ -1,4 +1,20 @@
-<?php session_start(); ?>
+<?php session_start(); 
+      require_once '../../classes/functions.class.php';
+      $fun = new Functions();
+
+      require_once '../../classes/getter.class.php';
+      $get = new Getter();
+
+      require_once '../../classes/inserter.class.php';
+      $ins = new Inserting();
+
+      require_once '../../classes/resetpassword.class.php';
+      $res = new Reset();
+
+      require_once '../../classes/verify.class.php';
+      $ver = new Verify();
+      
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,28 +46,21 @@
 
       <?php
             /* DEFAULT */
-            if(!isset($_SESSION['cmpn_name']) && !isset($_SESSION['cmpn_name']) && $_GET['s'] == 'publish') {
-                  echo "<script>window.location.replace('./rpsrv.php?s=signin')</script>";    
+            if(!isset($_SESSION['cmpn_name']) && !isset($_SESSION['cmpn_name']) && $_GET['tab'] == 'publish') {
+                  echo "<script>window.location.replace('./rpsrv.php?tab=signin')</script>";    
             }
             /*DEFAULT*/
                   /* COMPANY */ 
                         if(isset($_SESSION['cmpn_name'])) {
                               
                               /* PUBLISH */
-                                    if($_GET['s'] == "publish") {
+                                    if($_GET['tab'] == "publish") {
                                           include './publish/publish.php';     
                                     }
                               /* END PUBLISH */
 
-                              /* RESET */
-                                    else if(isset($_GET['c'])) {
-                                          $lnk = $_GET['c'];
-                                          include "./authentication/reset.php?c=$lnk";  
-                                    }
-                              /* END RESET */
-
                               /* VERIFY */ 
-                                    else if(isset($_GET['v'])) {
+                                    else if($_GET['tab'] == 'verify' && isset($_GET['v']) && isset($_GET['cc'])) {
                                           include "./authentication/verify.php";
                                     }
                               /* END VERIFY */                       
@@ -66,17 +75,10 @@
 
                   /* USER */
                         else if(isset($_SESSION['usr_name'])) {
-                              /* RESET */
-                                    if (isset($_GET['u'])) {
-                                          $lnk = $_GET['u'];
-                                          include "./authentication/reset.php?u=$lnk";
-                                    }
-                              /* END RESET */
-                              
                               /* VERIFY */ 
-                                    else if(isset($_GET['v'])) {
-                                          include "./authentication/verify.php";
-                                    }
+                              if($_GET['tab'] == 'verify' && isset($_GET['v']) && isset($_GET['cc'])) {
+                                    include "./authentication/verify.php";
+                              }
                               /* END VERIFY */ 
                               
                               /* 404 ERROR PAGE*/ 
@@ -90,29 +92,35 @@
                   else {
                         
                         /* COMPANY REGISTER */
-                              if ($_GET['s'] == "csignup") {
+                              if ($_GET['tab'] == "csignup") {
                                     include './authentication/cmpn/register.php';
                               }
                         /* END COMPANY REGISTER */
 
                         /* USER REGISTER */
-                              else if ($_GET['s'] == "usignup") {
+                              else if ($_GET['tab'] == "usignup") {
                                     include './authentication/usr/signup.php';
                               }
                         /* END USER REGISTER */
                         
                         /* SIGN IN */
-                              else if($_GET['s'] == 'signin') {
+                              else if($_GET['tab'] == 'signin') {
                                     include './authentication/signin.php';
                               }
                         /* END SIGN IN */ 
                         
-                        /* RESET PASSWORD */
-                              else if($_GET['s'] == 'resetpassword') {
-                                    include './authentication/reset.php';
+                        /* RESET PASSWORD LINK */
+                              else if($_GET['tab'] == 'resetpasswordl') {
+                                    include './authentication/resetpass/resetlink.php';
                               }
-                        /* END RESET PASSWORD*/ 
-                        
+                        /* END RESET PASSWORD LINK*/ 
+
+                        /* PASSWORD RESET */
+                              else if($_GET['tab'] == 'resetpassword') {
+                                    include './authentication/resetpass/resetpassword.php';
+                              }
+                        /* END PASSWORD RESET */  
+
                         /* 404 ERROR PAGE*/ 
                               else {
                                     echo "PAGE WASN'T FOUND. 404"; 

@@ -1,15 +1,6 @@
-<?php 
-      session_start();
-      // Including Classes
-      require_once "../../classes/functions.class.php";
-      require_once '../../classes/inserter.class.php';
+<?php session_start();
 
-      // Classes Def Clld Funcs 
-            // inserter.class.php
-                  $ins = new Inserting();   
-            // functions.class.php    
-                  $fun = new Functions();
-                  $fun->delete_password_reset_links();
+      $res->delete_password_reset_links();
 ?>
 
 
@@ -36,7 +27,7 @@ You need to verify your account to publish vacancy
                         <h1 class="headersholder-h1">Fill Your Vacancy</h1>
                   </div>
                   <center>
-                        <form action="<?php echo $_SERVER['PHP_SELF'] . "?s=publish";?>" method="POST" class="add" autocomplete="off" enctype="multipart/form-data">
+                        <form action="<?php echo $_SERVER['PHP_SELF'] . "?tab=publish";?>" method="POST" class="add" autocomplete="off" enctype="multipart/form-data">
                               <input type="text" name="firstname" id="in" placeholder="First Name" style='width: 15%; display: inline-block'>
                               <input type="text" name="lastname" id="in" placeholder="Last Name" style="width:15%; display: inline-block">
                               <div></div>
